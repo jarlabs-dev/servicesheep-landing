@@ -1,0 +1,122 @@
+/* tokens.css — design tokens for donate.servicesheep.com
+ *
+ * Generated from the design-system docs in /docs:
+ *   color-palette.md · semantic-tokens.md · typography.md · tokens.md
+ *
+ * Naming rule (see docs/tokens.md): a camelCase token identifier in the docs
+ * (e.g. colorBrandPrimary, buttonPrimaryFill) maps to a kebab-case CSS custom
+ * property here (--color-brand-primary, --button-primary-fill).
+ *
+ * Keep this file in sync with the docs — they are the source of truth.
+ */
+
+:root {
+  /* ── Foundation ─────────────────────────────────────────── */
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+  --color-surface-variant: #f1f5f9;
+  --color-surface-container: #e2e8f0;
+
+  /* ── Text ───────────────────────────────────────────────── */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-muted: #64748b;
+  --color-text-disabled: #94a3b8;
+  --color-text-on-brand: #f8fafc;
+
+  /* ── Brand ──────────────────────────────────────────────── */
+  --color-brand-primary: #0e7490;
+  --color-brand-primary-splash: #155e75;
+  --color-brand-accent: #cffafe;
+  --color-brand-accent-splash: #a5f3fc;
+  --color-brand-link: #155e75;
+
+  /* ── Border / icon ──────────────────────────────────────── */
+  --color-border: #cbd5e1;
+  --color-border-strong: #94a3b8;
+  --color-border-subtle: #e2e8f0;
+  --color-icon: #334155;
+  --color-icon-muted: #64748b;
+  --color-icon-active: #0e7490;
+  --color-icon-disabled: #94a3b8;
+
+  /* ── Feedback ───────────────────────────────────────────── */
+  --color-success: #16a34a;
+  --color-success-bg: #dcfce7;
+  --color-error: #dc2626;
+  --color-error-bg: #fee2e2;
+  --color-warning: #d97706;
+  --color-warning-bg: #fef3c7;
+
+  /* ── Status (pin states — semantic-tokens.md) ───────────────
+     Not used by the donation page yet; carried over so a future
+     PinStatusIcon port has them ready. */
+  --color-status-unvisited: #64748b;
+  --color-status-initial-call: #0e7490;
+  --color-status-return-visit: #7c3aed;
+  --color-status-bible-study: #16a34a;
+  --color-status-not-interested: #dc2626;
+  --color-status-moved-out: #d97706;
+  --color-status-already-witness: #2563eb;
+  --color-status-hostile: #991b1b;
+
+  /* ── Button (Primary / Tonal / Outlined / Ghost / Destructive) ── */
+  --button-primary-fill: #0e7490;
+  --button-primary-fill-pressed: #155e75;
+  --button-primary-fill-disabled: #e2e8f0;
+  --button-primary-text: #ffffff;
+  --button-primary-text-disabled: #94a3b8;
+  --button-tonal-fill: #cffafe;
+  --button-tonal-fill-pressed: #67e8f9;
+  --button-tonal-fill-disabled: #f1f5f9;
+  --button-tonal-text: #164e63;
+  --button-tonal-text-pressed: #083344;
+  --button-tonal-text-disabled: #94a3b8;
+  --button-outlined: #cbd5e1;
+  --button-outlined-pressed: #64748b;
+  --button-outlined-disabled: #e2e8f0;
+  --button-outlined-text: #164e63;
+  --button-outlined-text-pressed: #083344;
+  --button-outlined-text-disabled: #94a3b8;
+  --button-ghost-text: #0e7490;
+  --button-ghost-text-pressed: #155e75;
+  --button-ghost-text-disabled: #94a3b8;
+  --button-destructive-fill: #dc2626;
+  --button-destructive-fill-pressed: #991b1b;
+  --button-destructive-fill-disabled: #e2e8f0;
+  --button-destructive-text: #ffffff;
+  --button-destructive-ghost-text: #dc2626;
+  --button-destructive-ghost-text-pressed: #991b1b;
+
+  /* ── Radius / shadow ───────────────────────────────────────
+     From docs/tokens.md (carried over from the source design
+     system; promote to dedicated docs when those scales exist). */
+  --radius-field: 12px;
+  --radius-button: 16px;
+  --radius-card: 16px;
+  --radius-toast: 16px;
+  --shadow-cards-resting: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 12px rgb(15 23 42 / 0.08);
+
+  /* ── Typography (from docs/typography.md) ───────────────────
+     `font` shorthand: weight size/line-height family.
+     Manrope weights used: 500 (Medium) · 600 (SemiBold) · 700 (Bold).
+     Note: the type scale also defines small letter-spacing values, but
+     the CSS `font` shorthand can't carry letter-spacing and the amounts
+     are sub-pixel — omitted for now. Add per-class `letter-spacing` later
+     if the design calls for it. */
+  --font-family-base: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --font-display-small: 700 2.25rem/1.22 var(--font-family-base);
+  --font-headline-large: 700 2rem/1.25 var(--font-family-base);
+  --font-headline-medium: 700 1.75rem/1.29 var(--font-family-base);
+  --font-headline-small: 700 1.5rem/1.33 var(--font-family-base);
+  --font-title-large: 600 1.375rem/1.27 var(--font-family-base);
+  --font-title-medium: 600 1rem/1.5 var(--font-family-base);
+  --font-title-small: 600 0.875rem/1.43 var(--font-family-base);
+  --font-body-large: 500 1rem/1.5 var(--font-family-base);
+  --font-body-medium: 500 0.875rem/1.43 var(--font-family-base);
+  --font-body-small: 500 0.75rem/1.5 var(--font-family-base);
+  --font-label-large: 600 0.875rem/1.43 var(--font-family-base);
+  --font-label-medium: 600 0.75rem/1.33 var(--font-family-base);
+  --font-label-small: 600 0.625rem/1.4 var(--font-family-base);
+}

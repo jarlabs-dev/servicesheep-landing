@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Service Sheep — Coming soon</title>
+  <meta name="description" content="Service Sheep is on the way. A simple way to run your service business, coming soon. In the meantime, you can help support the project.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://servicesheep.com/">
+  <meta property="og:site_name" content="Service Sheep">
+  <meta property="og:title" content="Service Sheep — Coming Soon">
+  <meta property="og:description" content="Service Sheep is on the way.">
+  <meta property="og:image" content="https://servicesheep.com/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Service Sheep — coming soon">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Service Sheep — Coming soon">
+  <meta name="twitter:description" content="Service Sheep is on the way.">
+  <meta name="twitter:image" content="https://servicesheep.com/assets/og-image.jpg">
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Service Sheep">
+  <meta name="theme-color" content="#0e7490">
+
+  <!-- Manrope — self-hosted (no external request, so the page never stalls on a blocked font server) -->
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/landing.css">
+
+  <!-- Component registry (modules defer automatically) -->
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="container container--lg site-header">
+    <a class="wordmark" href="/">
+      <span class="wordmark__mark">
+        <img src="/favicon-96x96.png" alt="" width="88" height="88">
+      </span>
+      <span class="wordmark__text"><span class="wordmark__service">Service</span> Sheep</span>
+    </a>
+  </header>
+
+  <main>
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section class="container container--lg hero">
+      <!-- [EDIT] eyebrow + headline + lead — describe Service Sheep in your own words -->
+      <h1 class="hero__title"><span class="hero__title-coming">Coming</span> <span class="hero__title-soon">soon.</span></h1>
+      <p class="hero__lead">
+        We're putting the finishing touches on Service Sheep.<br>Check back soon — and if you'd like to help us get to launch, you can <strong>support the project</strong> today.
+      </p>
+      <div class="hero__actions">
+        <ui-button href="https://donate.servicesheep.com" size="large" data-label="Support the project">
+          <svg slot="trailing" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </ui-button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container container--lg">
+      <div class="site-footer__brand">Service Sheep</div>
+      <p class="site-footer__text">Questions? Email <a href="mailto:hello@servicesheep.com">hello@servicesheep.com</a></p>
+    </div>
+  </footer>
+</body>
+</html>
