@@ -102,3 +102,16 @@ main { margin-bottom: auto; }
 .site-footer__brand { font: var(--font-title-small); color: var(--color-text-primary); }
 .site-footer__text { font: var(--font-body-medium); color: var(--color-text-muted); margin-top: 0.5rem; }
 .site-footer__text a { color: var(--color-brand-link); }
+.site-footer__legal {
+  font: var(--font-body-small);
+  color: var(--color-text-muted);
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.site-footer__legal-label { color: var(--color-text-muted); }
+.site-footer__legal a { color: var(--color-brand-link); }
+.site-footer__legal-sep { color: var(--color-border-subtle); }
