@@ -1,0 +1,85 @@
+/* legal.css — page-level layout for long-form legal documents (privacy policy, etc.).
+ * Built only from tokens.css custom properties (no hard-coded colours/type).
+ * BEM block here: .legal. Loaded instead of landing.css on document pages. */
+
+/* ── Reading shell ──────────────────────────────────────────── */
+.container {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.legal {
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* ── Document header ────────────────────────────────────────── */
+.legal__title {
+  font: var(--font-display-small);
+  color: var(--color-text-primary);
+}
+.legal__meta {
+  margin-top: 0.75rem;
+  font: var(--font-body-medium);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+.legal__meta a { color: var(--color-brand-link); }
+.legal__meta-updated { font-style: italic; }
+
+/* ── Section structure ──────────────────────────────────────── */
+.legal h2 {
+  font: var(--font-headline-small);
+  color: var(--color-text-primary);
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+  padding-top: clamp(2rem, 4vw, 2.75rem);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+/* ── Body copy ──────────────────────────────────────────────── */
+.legal p,
+.legal li {
+  font: var(--font-body-large);
+  line-height: 1.65;
+  color: var(--color-text-secondary);
+}
+.legal p { margin-top: 1rem; }
+.legal h2 + p { margin-top: 1rem; }
+
+.legal ul {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.legal li { padding-left: 0.25rem; }
+
+.legal strong {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+.legal a {
+  color: var(--color-brand-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  background: var(--color-surface-variant);
+  color: var(--color-text-primary);
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+}
+
+/* ── Closing disclaimer ─────────────────────────────────────── */
+.legal__disclaimer {
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+  padding-top: clamp(2rem, 4vw, 2.75rem);
+  border-top: 1px solid var(--color-border-subtle);
+  font: var(--font-body-medium);
+  font-style: italic;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}

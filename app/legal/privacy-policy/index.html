@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Service Sheep</title>
+  <meta name="description" content="Privacy policy for the Service Sheep mobile app: what the app stores on your device, what an export contains, and your rights under the Data Privacy Act of 2012.">
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Service Sheep">
+  <meta name="theme-color" content="#0e7490">
+
+  <!-- Manrope — self-hosted (no external request, so the page never stalls on a blocked font server) -->
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/legal.css">
+</head>
+<body>
+  <main class="container legal">
+    <h1 class="legal__title">Privacy Policy</h1>
+    <p class="legal__meta">
+      <strong>Service Sheep</strong><br>
+      <span class="legal__meta-updated">Last updated: June 25, 2026</span>
+    </p>
+
+    <h2>1. Overview</h2>
+    <p>Service Sheep is a field ministry territory management platform developed by Jar Labs (Johannen Gabriel Robles &amp; Jazielle Mavis Robles), offered as a two-app service: a mobile app for iOS and Android, and a web-based admin console. This privacy policy covers the mobile app only. The mobile app is designed to be privacy-first: it collects no personal accounts, no user identity, and no analytics about how users interact with the mobile app. All ministry records are stored on your device and leave it only when you explicitly initiate an export.</p>
+    <p>The Service Sheep web console (admin portal) is a separate product governed by its own privacy policy. This policy explains what data is collected by the mobile app, how it is used, and your rights under the <strong>Data Privacy Act of 2012 (Republic Act No. 10173)</strong> of the Philippines.</p>
+
+    <h2>2. Definitions</h2>
+    <ul>
+      <li><strong>"We," "us," "our"</strong> — Jar Labs (Johannen Gabriel Robles &amp; Jazielle Mavis Robles), the developers of Service Sheep.</li>
+      <li><strong>"You," "your," "user"</strong> — any person using the Service Sheep mobile app.</li>
+      <li><strong>"The mobile app"</strong> — the Service Sheep iOS/Android application this policy covers.</li>
+      <li><strong>"The web console"</strong> — the Service Sheep admin portal at <a href="https://console.servicesheep.com" target="_blank" rel="noopener">console.servicesheep.com</a>, governed by a <a href="https://console.servicesheep.com/legal/privacy-policy" target="_blank" rel="noopener">separate privacy policy</a>.</li>
+      <li><strong>"Congregation"</strong> — the local group your device is enrolled into.</li>
+    </ul>
+
+    <h2>3. Who This Policy Applies To</h2>
+    <p>This policy applies to users of the Service Sheep mobile app. It does not apply to the Service Sheep web console, which is governed by a separate privacy policy. <strong>Service Sheep is intended for use in the Philippines only.</strong> Users outside the Philippines are not the intended audience of this service, and this policy is written in accordance with Philippine law. The mobile app requires no account and collects no information that identifies you personally.</p>
+
+    <h2>4. Roles and Responsibilities</h2>
+    <p>Under RA 10173, <strong>Service Sheep acts as a Data Processor</strong> — it provides tools for recording and managing ministry activity but does not determine what information is entered or how it is used.</p>
+    <p><strong>Users are the Data Controllers.</strong> They decide what is recorded and are responsible for ensuring that records do not contain personally identifiable information (PII) about householders.</p>
+    <p>The mobile app is designed to capture publicly observable details about locations — landmarks, GPS coordinates — and ministry activity such as visit dates and discussion topics. Users determine how specifically they describe a location. It does not prompt for or require householder names, nationality, or personal details. However, free-text fields (visit notes, landmarks, personal notes) cannot technically prevent a user from entering such information.</p>
+    <p><strong>It is the user's responsibility to ensure that no personally identifiable information about householders is entered into the mobile app.</strong> Service Sheep provides the technical tools; it does not control or review what users type.</p>
+    <p>The only data excluded from exports by the mobile app is personal notes — visit log content and landmarks are exported exactly as entered. There is no automatic PII detection or filtering on export. It is entirely the user's responsibility to ensure no personally identifiable information is recorded in the first place.</p>
+    <p><strong>All congregation, territory, and ministry data entered into the mobile app is owned by you and your congregation.</strong> Service Sheep is not responsible for any congregation or ministry data stored in the mobile application. Where required by law, you are personally responsible for obtaining the necessary permissions to collect and store such data, and for using it in accordance with relevant laws and regulations.</p>
+
+    <h2>5. Data Stored on Your Device</h2>
+    <p>All ministry data is stored locally on your device in a local database. Ministry records are never automatically transmitted to any server. The only data the mobile app sends automatically is crash diagnostics to Sentry in the event of an error (see Section 8).</p>
+    <p>Users are responsible for protecting the device on which the mobile app is installed and the data stored on it. Service Sheep does not control device-level security.</p>
+    <p><strong>Ministry records stored on-device include:</strong></p>
+    <ul>
+      <li>Territory boundaries and map files</li>
+      <li>GPS coordinates of visited locations (pins)</li>
+      <li>Location statuses (e.g., Initial Call, Return Visit, Not Interested)</li>
+      <li>Visit logs: date, time, landmarks, and discussion notes</li>
+      <li>Personal notes on pins and visit logs</li>
+    </ul>
+    <p>Users may optionally set a 4-digit lock PIN and a master PIN to restrict access to the mobile app. These are created on demand and are not required. Only the bcrypt hash of each PIN is stored on-device — the raw PIN is never stored anywhere. PINs are never transmitted or included in any export.</p>
+    <p><strong>Personal notes are strictly private.</strong> They are stored in isolated tables, are never included in any export, and never leave your device under any circumstance.</p>
+    <p><strong>The mobile app does not store:</strong></p>
+    <ul>
+      <li>Your name, identity, or any account credentials</li>
+      <li>Householder names, nationality, or family information</li>
+      <li>Your device's location (the mobile app records visited locations, not the user's own GPS position)</li>
+      <li>User's behavioral data or usage analytics of any kind</li>
+    </ul>
+
+    <h2>6. Data Exported via Report Packages (.ssrep)</h2>
+    <p>When you tap <strong>Export</strong> on a territory, the mobile app packages that territory's ministry data into an encrypted <code>.ssrep</code> report file and presents the system share sheet. You choose where to send it — for example, via WhatsApp, email, or AirDrop — to your Field Service Group Overseer, who forwards it to the territory servant for consolidation in the congregation's web console.</p>
+    <p><strong>What an export contains:</strong></p>
+    <ul>
+      <li>GPS coordinates of pins</li>
+      <li>Location statuses</li>
+      <li>Visit logs (dates, landmarks, discussion notes)</li>
+      <li>Territory boundary geometry (inside the encrypted body)</li>
+    </ul>
+    <p><strong>What an export is designed never to contain:</strong></p>
+    <ul>
+      <li>Householder names, nationality, or family information</li>
+      <li>Your personal notes</li>
+      <li>Any information that identifies you as the user</li>
+    </ul>
+    <p>Personal notes are the only item above that is technically enforced — the mobile app excludes them automatically. The remaining items depend entirely on users not entering such information into free-text fields. The mobile app does not scan or filter visit log content or landmarks before export.</p>
+    <p>Exports are AES-256-GCM encrypted using your congregation's data key. Only an enrolled device or the congregation's web console can decrypt them.</p>
+    <p>The mobile app's responsibility ends at the share sheet. Once you share the file, it travels through the channel you selected and is ultimately imported into your congregation's web console, also built and operated by Jar Labs. Once imported, that data is governed by the <a href="https://console.servicesheep.com/legal/privacy-policy" target="_blank" rel="noopener">Service Sheep web console's privacy policy</a>, not this one.</p>
+    <p><strong>Export is always user-initiated.</strong> Exporting a territory does not remove it from your device — territory data remains stored locally until you explicitly delete it. The mobile app will warn you before allowing deletion if a territory has not yet been exported.</p>
+
+    <h2>7. Device Enrollment</h2>
+    <p>Before the mobile app can import territory maps or export reports, your device must be enrolled into a congregation by scanning an enrollment QR code and entering an activation passphrase provided by your congregation's service overseer. Enrollment requires access to your device's camera to scan the QR code, or access to your photo library if you choose to import the QR code from a saved image. These permissions are used solely for enrollment and are not used for any other purpose.</p>
+    <ul>
+      <li>The <strong>activation passphrase is never stored</strong> on your device or transmitted anywhere.</li>
+      <li>Enrollment stores only your congregation's ID, display name, key version, and encrypted data key in your device's secure storage (iOS Keychain / Android EncryptedSharedPreferences).</li>
+      <li>Switching to a different congregation wipes all local territory data (territories, pins, visit logs) from your device. Personal notes are not affected by a congregation switch — they remain on your device and are only removed when the mobile app is uninstalled.</li>
+    </ul>
+
+    <h2>8. Crash and Error Diagnostics (Sentry)</h2>
+    <p>The mobile app uses <strong>Sentry</strong> (Sentry.io, Inc.) to collect crash reports and error diagnostics in release builds only. Diagnostic builds (debug and profile) send nothing.</p>
+    <p>Before any event leaves your device, a scrubber unconditionally removes or redacts:</p>
+    <ul>
+      <li>Your identity and any user context</li>
+      <li>Network request data</li>
+      <li>Breadcrumb activity logs</li>
+      <li>GPS coordinates and coordinate-like numbers</li>
+      <li>File paths and territory file names</li>
+      <li>All frame-level local variables</li>
+    </ul>
+    <p>Only the <strong>exception type</strong> and a scrubbed stack trace are transmitted. No personal information, no ministry content, and no location data are ever sent to Sentry.</p>
+    <p>Sentry may receive your device's IP address as part of the HTTPS connection. This is a standard characteristic of any internet communication and is not combined with any identifying information on our end.</p>
+    <p>Sentry's own privacy policy is available at <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">https://sentry.io/privacy/</a>.</p>
+
+    <h2>9. Basemap Tile Downloads (Protomaps)</h2>
+    <p>Territory maps are rendered using <strong>MapLibre GL</strong> with vector tile data from <strong>Protomaps</strong> (Protomaps Inc.). Basemap tiles are not bundled in the mobile app. The first time you open a territory, the mobile app downloads only the tiles covering that territory from Protomaps' public tile server (<code>build.protomaps.com</code>). Once downloaded, tiles are cached on your device and the map works fully offline.</p>
+    <p>During a tile download, Protomaps' servers receive your device's IP address as part of the HTTP request. No API key is used and no account is required. After the initial download, no further requests are made to Protomaps for that territory.</p>
+    <p>Protomaps does not publish a separate privacy policy. For questions about their data practices, contact <a href="mailto:support@protomaps.com">support@protomaps.com</a>.</p>
+
+    <h2>10. Data We Do Not Collect</h2>
+    <p>To be explicit, Service Sheep does not:</p>
+    <ul>
+      <li>Create or require user accounts</li>
+      <li>Collect your name, email address, or any identifying information</li>
+      <li>Track your location or movements</li>
+      <li>Share data with advertisers or third-party marketing services</li>
+      <li>Sell or monetize any data</li>
+      <li>Transmit ministry records automatically or in the background</li>
+      <li>Use cookies or web trackers</li>
+    </ul>
+
+    <h2>11. Data Security</h2>
+    <ul>
+      <li>All <code>.ssmap</code> and <code>.ssrep</code> package files are encrypted with AES-256-GCM using a per-congregation key.</li>
+      <li>Enrollment credentials are stored in platform-grade secure storage (iOS Keychain; Android EncryptedSharedPreferences).</li>
+      <li>The activation passphrase used during enrollment is derived using scrypt and is never stored anywhere.</li>
+      <li>On-device ministry data is stored in a local database. Switching congregations wipes all local territory data.</li>
+      <li>If set, lock PINs and master PINs are hashed with bcrypt (cost factor 12) before storage. The raw PIN is never stored or transmitted.</li>
+    </ul>
+
+    <h2>12. Data Retention</h2>
+    <p>Ministry data (territories, pins, visit logs) remains on your device until you delete a territory or re-enroll into a different congregation. Personal notes remain on your device across congregation switches and are only removed when the mobile app is uninstalled or app data is cleared through your device's settings. The mobile app does not impose any automatic expiration on any data.</p>
+    <p>On iOS, enrollment credentials stored in the Keychain survive app uninstallation. The mobile app detects a re-installation and clears stale enrollment data automatically on first launch.</p>
+
+    <h2>13. Your Rights</h2>
+    <p>Under the <strong>Data Privacy Act of 2012 (RA 10173)</strong>, you have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> — request information about what data is held about you</li>
+      <li><strong>Correction</strong> — request correction of inaccurate data</li>
+      <li><strong>Erasure</strong> — request deletion of your data</li>
+      <li><strong>Restriction</strong> — request that processing be limited</li>
+      <li><strong>Data portability</strong> — receive your data in a portable format</li>
+      <li><strong>Object</strong> — object to processing in certain circumstances</li>
+    </ul>
+    <p>Because Service Sheep acts as a Data Processor, requests relating to ministry records held in the congregation's web console should be directed to your congregation's service overseer, who acts as the Data Controller for that data. That data is governed by the <a href="https://console.servicesheep.com/legal/privacy-policy" target="_blank" rel="noopener">Service Sheep web console's privacy policy</a>. For questions about the mobile app or this privacy policy, contact: <strong><a href="mailto:support@servicesheep.com">support@servicesheep.com</a></strong></p>
+
+    <h2>14. Children</h2>
+    <p>The mobile app is intended for users aged 16 and older. The mobile app does not knowingly collect personal information from any user regardless of age.</p>
+
+    <h2>15. Changes to This Policy</h2>
+    <p>We may update this policy from time to time. The current version is always available at <a href="https://servicesheep.com/app/legal/privacy-policy">https://servicesheep.com/app/legal/privacy-policy</a>. The "Last updated" date at the top of this document indicates when it was last revised.</p>
+
+    <h2>16. Contact</h2>
+    <p>
+      <strong>Jar Labs</strong><br>
+      Johannen Gabriel Robles &amp; Jazielle Mavis Robles<br>
+      <a href="mailto:support@servicesheep.com">support@servicesheep.com</a>
+    </p>
+
+    <p class="legal__disclaimer">Service Sheep is an independent project by Jar Labs and is not affiliated with JW.ORG or the Watchtower Bible and Tract Society. This is not an official application of Jehovah's Witnesses.</p>
+  </main>
+</body>
+</html>
