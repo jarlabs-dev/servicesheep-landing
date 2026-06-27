@@ -1,0 +1,88 @@
+/* review.css — page-level layout for the App Store / Play Store reviewer page.
+ * Built only from tokens.css custom properties (no hard-coded colours/type).
+ * BEM block here: .review. Loaded instead of landing.css on the review page. */
+
+/* ── Reading shell ──────────────────────────────────────────── */
+.container {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+.review {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* ── Header ──────────────────────────────────────────────────── */
+.review__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.review__title {
+  font: var(--font-headline-medium);
+  color: var(--color-text-primary);
+}
+.review__intro {
+  font: var(--font-body-large);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.review__intro strong {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+/* ── Enrolment steps ─────────────────────────────────────────── */
+.review__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: decimal;
+}
+.review__steps li {
+  padding-left: 0.25rem;
+  font: var(--font-body-medium);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+/* ── Sections ────────────────────────────────────────────────── */
+.review__section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.review__heading {
+  font: var(--font-title-large);
+  color: var(--color-text-primary);
+}
+.review__text {
+  font: var(--font-body-medium);
+  line-height: 1.5;
+  color: var(--color-text-secondary);
+}
+
+/* ── Enrolment QR ────────────────────────────────────────────── */
+.review__qr {
+  width: 260px;
+  height: auto;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+}
+
+/* ── Activation passphrase ───────────────────────────────────── */
+.review__passphrase {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.875em;
+  background: var(--color-surface-variant);
+  color: var(--color-text-primary);
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+}

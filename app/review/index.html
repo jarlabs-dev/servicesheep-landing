@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>App Review Access — Service Sheep</title>
+  <meta name="description" content="Sample data for App Store and Play Store reviewers to exercise the Service Sheep mobile apps: an enrolment QR code, activation passphrase, and a sample territory map file.">
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Service Sheep">
+  <meta name="theme-color" content="#0e7490">
+
+  <!-- Manrope — self-hosted (no external request, so the page never stalls on a blocked font server) -->
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/review.css">
+</head>
+<body>
+  <main class="container review">
+    <header class="review__header">
+      <h1 class="review__title">App Review Access</h1>
+      <p class="review__intro">
+        Sample data for reviewing the Service Sheep mobile apps. Enroll a test device with the
+        QR code, then import the sample map to try the full offline territory flow. This is demo
+        data for <strong>English Congregation - Demo</strong>.
+      </p>
+    </header>
+
+    <ol class="review__steps">
+      <li>Install the Service Sheep app from the App Store or Play Store and open it.</li>
+      <li>To enroll a device, scan the QR code below, then enter the activation passphrase when prompted.</li>
+      <li>Download the sample map file and open it in the app to import the Silang sample territory, its pins, and visit logs.</li>
+    </ol>
+
+    <section class="review__section">
+      <h2 class="review__heading">1. Enrolment QR code</h2>
+      <img class="review__qr"
+           src="/app/review/enrollment-qr.webp"
+           alt="Device enrolment QR code"
+           width="260" height="260">
+      <p class="review__text">
+        Activation passphrase: <code class="review__passphrase">silang-demo-2026</code>
+      </p>
+    </section>
+
+    <section class="review__section">
+      <h2 class="review__heading">2. Sample map file</h2>
+      <p class="review__text">
+        Download this file and open it in the app once the device is enrolled.
+      </p>
+      <a class="button button--primary button--large"
+         href="/app/review/sample-territory.ssmap"
+         download>Download sample map (.ssmap)</a>
+    </section>
+  </main>
+</body>
+</html>
