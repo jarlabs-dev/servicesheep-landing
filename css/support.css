@@ -1,0 +1,162 @@
+/* support.css — page-level layout for the mobile app support page (/app/support).
+ * Built only from tokens.css custom properties (no hard-coded colours/type).
+ * BEM blocks here: .site-header/.wordmark, .support-hero, .faq, .site-footer.
+ * Self-contained (landing.css is not loaded here); the header/footer blocks are
+ * adapted from landing.css so this page owns everything it needs. */
+
+/* ── Page shell ─────────────────────────────────────────────── */
+/* Content-heavy page: flow top-down, pin the footer to the bottom on short
+   viewports (no vertical-centering like the coming-soon landing page). */
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+main { flex: 1; }
+
+.container {
+  /* width:100% is required because the header and <main> are flex children of
+     the body column-flex. Their `margin-inline:auto` cancels the default
+     `stretch`, so without an explicit width they shrink-wrap to their content —
+     which made the reading column widen from ~570px to 720px as an FAQ expanded.
+     Filling to the max-width keeps the column a stable 720px in every state. */
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.site-header {
+  display: flex;
+  align-items: center;
+  padding-block: 1.25rem;
+}
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+.wordmark__mark {
+  display: inline-flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.625rem;
+  overflow: hidden;
+}
+.wordmark__mark img { width: 100%; height: 100%; object-fit: cover; }
+.wordmark__text { font: var(--font-title-large); }
+.wordmark__service { font-weight: 500; }
+
+/* ── Support hero ───────────────────────────────────────────── */
+.support-hero {
+  padding-block: clamp(1.5rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3rem);
+}
+.support-hero__title {
+  font: var(--font-display-small);
+  color: var(--color-text-primary);
+}
+.support-hero__lead {
+  font: var(--font-body-large);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-top: 0.75rem;
+  max-width: 52ch;
+}
+.support-hero__lead a { color: var(--color-brand-link); }
+.support-hero__actions { margin-top: 1.5rem; display: inline-flex; }
+
+/* ── FAQ ────────────────────────────────────────────────────── */
+.faq { padding-bottom: clamp(2.5rem, 6vw, 4rem); }
+.faq__heading {
+  font: var(--font-headline-small);
+  color: var(--color-text-primary);
+  padding-top: clamp(2rem, 4vw, 2.5rem);
+  border-top: 1px solid var(--color-border-subtle);
+  margin-bottom: 1rem;
+}
+
+.faq__item {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+.faq__item + .faq__item { margin-top: 0.75rem; }
+
+.faq__question {
+  list-style: none; /* drop the native disclosure triangle (Firefox) */
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  font: var(--font-title-medium);
+  color: var(--color-text-primary);
+  transition: background-color 120ms ease;
+}
+.faq__question::-webkit-details-marker { display: none; } /* Safari/Chrome */
+.faq__question:hover { background: var(--color-surface-variant); }
+.faq__question:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-brand-primary) 45%, transparent);
+}
+.faq__question > span { flex: 1; }
+
+.faq__caret {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: 0.125rem;
+  color: var(--color-icon-muted);
+  transition: transform 180ms ease;
+}
+.faq__item[open] .faq__caret { transform: rotate(180deg); }
+
+.faq__answer {
+  padding: 0 1.25rem 1.25rem;
+}
+.faq__answer p {
+  font: var(--font-body-medium);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.faq__answer p + p { margin-top: 0.75rem; }
+.faq__answer ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.faq__answer li {
+  font: var(--font-body-medium);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.faq__answer strong { color: var(--color-text-primary); font-weight: 700; }
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.site-footer {
+  border-top: 1px solid var(--color-border-subtle);
+  text-align: center;
+  padding-block: 2.5rem;
+}
+.site-footer__brand { font: var(--font-title-small); color: var(--color-text-primary); }
+.site-footer__text { font: var(--font-body-medium); color: var(--color-text-muted); margin-top: 0.5rem; }
+.site-footer__text a { color: var(--color-brand-link); }
+.site-footer__legal {
+  font: var(--font-body-small);
+  color: var(--color-text-muted);
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.site-footer__legal-label { color: var(--color-text-muted); }
+.site-footer__legal a { color: var(--color-brand-link); }
+.site-footer__legal-sep { color: var(--color-border-subtle); }

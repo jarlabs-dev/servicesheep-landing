@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support — Service Sheep</title>
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Service Sheep">
+  <meta name="theme-color" content="#0e7490">
+
+  <!-- Manrope — self-hosted (no external request, so the page never stalls on a blocked font server) -->
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/support.css">
+
+  <!-- Component registry (modules defer automatically) — only used for <ui-button> -->
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="container site-header">
+    <a class="wordmark" href="/">
+      <span class="wordmark__mark">
+        <img src="/favicon-96x96.png" alt="" width="40" height="40">
+      </span>
+      <span class="wordmark__text"><span class="wordmark__service">Service</span> Sheep</span>
+    </a>
+  </header>
+
+  <main class="container">
+    <!-- ── Support hero ─────────────────────────────────────── -->
+    <section class="support-hero">
+      <h1 class="support-hero__title">Support</h1>
+      <p class="support-hero__lead">
+        Have a question or need a hand with the Service Sheep app? Send us a message and we'll get back to you. You may also find a quick answer in the FAQs below.
+      </p>
+      <div class="support-hero__actions">
+        <ui-button href="mailto:support@servicesheep.com" size="large" data-label="Email us">
+          <svg slot="leading" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>
+        </ui-button>
+      </div>
+    </section>
+
+    <!-- ── FAQ ──────────────────────────────────────────────── -->
+    <section class="faq" aria-labelledby="faq-heading">
+      <h2 class="faq__heading" id="faq-heading">Frequently asked questions</h2>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How do I set up the app for the first time?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Your device must be enrolled to your congregation before you can import maps. On the Home Screen, tap "Scan QR Code" (or "Import QR Code") and use the enrollment QR code from your Field Service Group Overseer (FSGO). Your overseer then enters the activation passphrase to finish enrollment. This is a one-time setup that links your device to your congregation.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How do I get a map?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>First make sure your device is enrolled to your congregation (see "How do I set up the app for the first time?"). Then ask your Field Service Group Overseer (FSGO) to send you a .ssmap file, tap the import button on the Home Screen, and select the file.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Do I need an internet connection to use the app?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Almost entirely. The only time the app needs the internet is to download a map's background tiles the first time you open that map. After that, the map works fully offline. Enrolling, importing maps, recording visits, and exporting all work without a connection.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Do I need an account or login?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>No account, login, email, or password is needed. The app does require a one-time device enrollment to your congregation using a QR code and activation passphrase from your overseer — see "How do I set up the app for the first time?"</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>What happens if I enroll in a different congregation?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Enrolling your device into a different congregation erases all territory maps, pins, and visit logs on the device, to prevent mixing data between congregations. Your personal notes are kept. Re-enrolling into the same congregation does not delete anything. Always export any unsent data before switching. (Uninstalling the app is different — it permanently removes everything, including your personal notes.)</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>What devices are supported?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>iOS 14 and later, and Android 10 and later. Your device must have GPS capability.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How do I add a new pin?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Long-press anywhere inside the territory boundary on the map, then tap Add Pin.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Can I delete a pin I added by mistake?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Only if you added it on the current day. Pins from previous days cannot be deleted within the app.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Can I move or edit a pin's location?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>No. A pin's GPS coordinates are fixed at the point where you long-pressed and cannot be changed.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>What do the pin statuses mean?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <ul>
+            <li><strong>UV — Unvisited:</strong> surveyed but not yet called on</li>
+            <li><strong>IC — Initial Call:</strong> first visit made</li>
+            <li><strong>RV — Return Visit:</strong> subsequent visits in progress</li>
+            <li><strong>BS — Bible Study:</strong> person accepted a Bible study</li>
+            <li><strong>NI — Not Interested:</strong> householder declined further visits</li>
+            <li><strong>MO — Moved Out:</strong> no longer at this location</li>
+            <li><strong>JW — Already a Witness:</strong> location is a fellow Christian</li>
+            <li><strong>DNC — Do Not Call:</strong> do not revisit</li>
+            <li><strong>WP — Wrong Pin:</strong> no English-speaking resident at this location</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Can I rename a map?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>No. Map code names (e.g., SLNG 01, TGTY 03) are set in the web console and cannot be changed in the app.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Can I edit a visit log from a previous day?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>No. A visit log can only be edited on the day it was created — and this includes the personal note attached to it. After that day, both are locked. (Personal notes on pins are different: those can be edited at any time.)</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>What does "At Home" mean in a visit log?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>It records whether the householder was present when you visited.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How do I send my visit data back?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Open the map, tap the export button in the top bar, and share the .ssrep file via WhatsApp, Messenger, AirDrop, email, or any sharing method on your device. Send it to your FSGO or territory servant.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>What happens if I try to delete a map before exporting?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>The app will warn you and block the deletion. You must export the map first, then slide to delete again.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Can I import a report package from another publisher?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>No. Service Sheep only accepts map packages exported from the web console. Report packages are for the web console only.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Can I import a map from different congregation?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>No. You can only import map packages exported from your device's enrolled congregation. This is to prevent mixing data between congregations</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How do I set a PIN to lock the app?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Go to Settings → Security → and tap Lock PIN.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>I forgot my lock PIN. What do I do?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>On the lock screen, switch to entering the Master PIN instead. If no Master PIN was set, you will need to reinstall the app.</p>
+          <p>Note: Reinstalling permanently removes all local data.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>What is the Master PIN?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>A master recovery PIN configured in Settings by the Field Service Group Overseer or Territory Servant. It lets you unlock the app if you forget your own lock PIN. It is strongly recommended to set this whenever you set a lock PIN.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Is any of my data sent to the internet or a server?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Your ministry data — maps, pins, visit logs, and personal notes — never leaves your device unless you manually tap export. There is no account, no cloud sync, and no analytics about how you use the app — your activity is never tracked. The app uses the internet for only two things: downloading map background tiles the first time you open a map, and sending anonymous crash reports that are automatically stripped of all personal and ministry data before they are sent.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Are householder names stored in the app?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>No. The app does not store names, nationality, or any personal information about householders. This is a deliberate privacy safeguard.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>What is a personal note, and is it shared in exports?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>A personal note is free-text you write for yourself on a pin or visit log. It is stored only on your device and is never included in any exported .ssrep file.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__brand">Service Sheep</div>
+      <p class="site-footer__text">Questions? Email <a href="mailto:support@servicesheep.com">support@servicesheep.com</a></p>
+      <nav class="site-footer__legal" aria-label="Mobile app legal">
+        <span class="site-footer__legal-label">Mobile app:</span>
+        <a href="/app/legal/privacy-policy">Privacy Policy</a>
+        <span class="site-footer__legal-sep" aria-hidden="true">·</span>
+        <a href="/app/legal/terms-of-use">Terms of Use</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
