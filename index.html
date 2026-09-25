@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Service Sheep — Coming soon</title>
-  <meta name="description" content="Service Sheep is on the way. A simple way to manage your territory offline, coming soon. In the meantime, you can help support the project.">
+  <title>Service Sheep</title>
+  <meta name="description" content="A web console for managing your congregation’s territory and a mobile app for working it offline. Set up once, and control what each publisher can access.">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://servicesheep.com/">
   <meta property="og:site_name" content="Service Sheep">
-  <meta property="og:title" content="Service Sheep — Coming Soon">
-  <meta property="og:description" content="Service Sheep is on the way.">
+  <meta property="og:title" content="Service Sheep">
+  <meta property="og:description" content="Territory management for congregations.">
   <meta property="og:image" content="https://servicesheep.com/assets/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Service Sheep — coming soon">
+  <meta property="og:image:alt" content="Service Sheep">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Service Sheep — Coming soon">
-  <meta name="twitter:description" content="Service Sheep is on the way.">
+  <meta name="twitter:title" content="Service Sheep">
+  <meta name="twitter:description" content="Territory management for congregations.">
   <meta name="twitter:image" content="https://servicesheep.com/assets/og-image.jpg">
 
   <!-- Favicons / PWA -->
@@ -33,53 +33,345 @@
   <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/css/fonts.css">
 
+  <!-- Above-the-fold hero image: start the download with the HTML, not after CSS.
+       imagesrcset/imagesizes must mirror the <img> below, or the preload picks a
+       different file than the img does and the browser downloads both. -->
+  <link rel="preload" as="image" fetchpriority="high"
+        href="/assets/hero-image-1145.webp"
+        imagesrcset="/assets/hero-image-1145.webp 1145w, /assets/hero-image-2290.webp 2290w"
+        imagesizes="(max-width: 639px) 100vw, (min-width: 1245px) 1145px, calc(100vw - 48px)">
+
   <!-- Design system -->
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/site-header.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
   <link rel="stylesheet" href="/css/landing.css">
 
   <!-- Component registry (modules defer automatically) -->
   <script type="module" src="/js/main.js"></script>
+  <!-- Mobile nav menu toggle -->
+  <script type="module" src="/js/site-header.js"></script>
 </head>
 <body>
   <!-- ── Header ─────────────────────────────────────────────── -->
-  <header class="container container--lg site-header">
-    <a class="wordmark" href="/">
-      <span class="wordmark__mark">
-        <img src="/favicon-96x96.png" alt="" width="88" height="88">
-      </span>
-      <span class="wordmark__text"><span class="wordmark__service">Service</span> Sheep</span>
-    </a>
+  <header class="site-header">
+    <div class="container container--wide site-header__inner">
+      <div class="site-header__brand">
+        <!-- Mobile only (below 1024px) -->
+        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg class="site-header__toggle-icon site-header__toggle-icon--open" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+          <svg class="site-header__toggle-icon site-header__toggle-icon--close" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
+        </button>
+
+        <a class="wordmark" href="/">
+          <span class="wordmark__mark">
+            <img src="/favicon-96x96.png" alt="" width="32" height="32">
+          </span>
+          <span class="wordmark__text">Service <span class="wordmark__sheep">Sheep</span></span>
+        </a>
+      </div>
+
+      <!-- One nav for both layouts: a centered row on desktop, a slide-down panel on mobile.
+           Admin Work / Field Work jump to their showcase sections; Contact opens /contact; Support opens /support.
+           Contact shows only on desktop (mobile has the Contact button in the bar);
+           Log In shows only in the mobile menu (desktop has the Log In button). -->
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#admin-work"><span>Admin Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="#field-work"><span>Field Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--desktop"><a class="site-nav__link" href="/contact"><span>Contact</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/support"><span>Support</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--mobile"><a class="site-nav__link" href="https://console.servicesheep.com" target="_blank" rel="noopener"><span>Log In</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__login">
+        <!-- Below 1024px: Contact (primary, small). From 1024px up: Log In (ghost, medium). -->
+        <ui-button class="site-header__contact" href="/contact" size="small" data-label="Contact"></ui-button>
+        <ui-button class="site-header__login-button" href="https://console.servicesheep.com" target="_blank" rel="noopener"
+                   variant="text" data-label="Log In"></ui-button>
+      </div>
+    </div>
+
+    <!-- Dims the page while the mobile menu is open; tapping it closes the menu -->
+    <div class="site-header__scrim" aria-hidden="true"></div>
   </header>
 
   <main>
     <!-- ── Hero ─────────────────────────────────────────────── -->
-    <section class="container container--lg hero">
-      <!-- [EDIT] eyebrow + headline + lead — describe Service Sheep in your own words -->
-      <h1 class="hero__title"><span class="hero__title-coming">Coming</span> <span class="hero__title-soon">soon.</span></h1>
-      <p class="hero__lead">
-        We're putting the finishing touches on Service Sheep.<br>Check back soon — and if you'd like to help us get to launch, you can <strong>support the project</strong> today.
-      </p>
-      <div class="hero__actions">
-        <ui-button href="https://donate.servicesheep.com" size="large" data-label="Support the project">
-          <svg slot="trailing" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </ui-button>
+    <section class="hero">
+      <div class="container container--wide">
+        <h1 class="hero__title">A console for managing territory.</h1>
+        <h1 class="hero__title hero__title--brand">An app for working it.</h1>
+        <p class="hero__caption">
+          Set up your congregation once from any browser, control exactly what each publisher can access,<br class="hero__break">
+          and let them work their territory offline with no account of their own.
+        </p>
+        <div class="hero__actions">
+          <ui-button href="/contact" size="large" data-label="Get in Touch"></ui-button>
+        </div>
+        <!-- src is the 1x file (fallback); sizes tells the browser how wide the image
+             actually renders at each breakpoint so it can pick the right one. -->
+        <img class="hero__image" alt=""
+             src="/assets/hero-image-1145.webp"
+             srcset="/assets/hero-image-1145.webp 1145w, /assets/hero-image-2290.webp 2290w"
+             sizes="(max-width: 639px) 100vw, (min-width: 1245px) 1145px, calc(100vw - 48px)"
+             width="1145" height="648" fetchpriority="high" decoding="async">
+      </div>
+    </section>
+
+    <!-- ── Benefits ─────────────────────────────────────────── -->
+    <section class="benefits">
+      <div class="container container--content">
+        <h2 class="benefits__title">Why choose Service Sheep?</h2>
+        <ul class="benefits__grid">
+          <li class="benefit-card">
+            <span class="benefit-card__icon">
+              <!-- Phosphor monitor (fill weight) -->
+              <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232,64V176a24,24,0,0,1-24,24H48a24,24,0,0,1-24-24V64A24,24,0,0,1,48,40H208A24,24,0,0,1,232,64ZM160,216H96a8,8,0,0,0,0,16h64a8,8,0,0,0,0-16Z"/></svg>
+            </span>
+            <h3 class="benefit-card__title">Browser-based, no installation</h3>
+            <p class="benefit-card__text">Works in Chrome, Firefox, Safari, or Edge. Nothing to download or update.</p>
+          </li>
+          <li class="benefit-card">
+            <span class="benefit-card__icon">
+              <!-- Phosphor lock-key (fill weight) -->
+              <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80Zm-72,78.63V184a8,8,0,0,1-16,0V158.63a24,24,0,1,1,16,0ZM160,80H96V56a32,32,0,0,1,64,0Z"/></svg>
+            </span>
+            <h3 class="benefit-card__title">You control who has access</h3>
+            <p class="benefit-card__text">Grant each publisher exactly the features they need — nothing more, nothing hidden.</p>
+          </li>
+          <li class="benefit-card">
+            <span class="benefit-card__icon">
+              <!-- Phosphor house-line (fill weight) -->
+              <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M240,208H224V136l2.34,2.34A8,8,0,0,0,237.66,127L139.31,28.68a16,16,0,0,0-22.62,0L18.34,127a8,8,0,0,0,11.32,11.31L32,136v72H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16Zm-88,0H104V160a4,4,0,0,1,4-4h40a4,4,0,0,1,4,4Z"/></svg>
+            </span>
+            <h3 class="benefit-card__title">Set up once per congregation</h3>
+            <p class="benefit-card__text">Your congregation gets a single console, seeded to the Service Overseer from day one.</p>
+          </li>
+          <li class="benefit-card">
+            <span class="benefit-card__icon">
+              <!-- Phosphor device-mobile (fill weight) -->
+              <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M176,16H80A24,24,0,0,0,56,40V216a24,24,0,0,0,24,24h96a24,24,0,0,0,24-24V40A24,24,0,0,0,176,16ZM80,32h96a8,8,0,0,1,8,8v8H72V40A8,8,0,0,1,80,32Zm96,192H80a8,8,0,0,1-8-8v-8H184v8A8,8,0,0,1,176,224Z"/></svg>
+            </span>
+            <h3 class="benefit-card__title">Your publishers’ app works offline</h3>
+            <p class="benefit-card__text">Once a map is imported, publishers can work it with no internet connection at all.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Features ─────────────────────────────────── -->
+    <section class="features">
+      <div class="container container--wide">
+        <h2 class="features__title">Everything you need to manage your congregation’s territory</h2>
+        <ul class="features__grid">
+          <li class="feature-card">
+            <span class="feature-card__icon">
+              <!-- Phosphor map-trifold (fill weight) -->
+              <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M228.92,49.69a8,8,0,0,0-6.86-1.45L160.93,63.52,99.58,32.84a8,8,0,0,0-5.52-.6l-64,16A8,8,0,0,0,24,56V200a8,8,0,0,0,9.94,7.76l61.13-15.28,61.35,30.68A8.15,8.15,0,0,0,160,224a8,8,0,0,0,1.94-.24l64-16A8,8,0,0,0,232,200V56A8,8,0,0,0,228.92,49.69ZM96,176a8,8,0,0,0-1.94.24L40,189.75V62.25L95.07,48.48l.93.46Zm120,17.75-55.07,13.77-.93-.46V80a8,8,0,0,0,1.94-.23L216,66.25Z"/></svg>
+            </span>
+            <h3 class="feature-card__title">Territory &amp; Map Management</h3>
+            <p class="feature-card__text">Create territories, draw or import map boundaries, and assign maps to publishers or field service groups — with overdue tracking built in.</p>
+          </li>
+          <li class="feature-card">
+            <span class="feature-card__icon">
+              <!-- Phosphor users-three (fill weight) -->
+              <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M64.12,147.8a4,4,0,0,1-4,4.2H16a8,8,0,0,1-7.8-6.17,8.35,8.35,0,0,1,1.62-6.93A67.79,67.79,0,0,1,37,117.51a40,40,0,1,1,66.46-35.8,3.94,3.94,0,0,1-2.27,4.18A64.08,64.08,0,0,0,64,144C64,145.28,64,146.54,64.12,147.8Zm182-8.91A67.76,67.76,0,0,0,219,117.51a40,40,0,1,0-66.46-35.8,3.94,3.94,0,0,0,2.27,4.18A64.08,64.08,0,0,1,192,144c0,1.28,0,2.54-.12,3.8a4,4,0,0,0,4,4.2H240a8,8,0,0,0,7.8-6.17A8.33,8.33,0,0,0,246.17,138.89Zm-89,43.18a48,48,0,1,0-58.37,0A72.13,72.13,0,0,0,65.07,212,8,8,0,0,0,72,224H184a8,8,0,0,0,6.93-12A72.15,72.15,0,0,0,157.19,182.07Z"/></svg>
+            </span>
+            <h3 class="feature-card__title">Publisher Management</h3>
+            <p class="feature-card__text">Add every publisher once, then grant each one exactly the permissions they need. No fixed roles — you decide, person by person.</p>
+          </li>
+          <li class="feature-card">
+            <span class="feature-card__icon">
+              <!-- Phosphor qr-code (fill weight) -->
+              <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M120,56v48a16,16,0,0,1-16,16H56a16,16,0,0,1-16-16V56A16,16,0,0,1,56,40h48A16,16,0,0,1,120,56Zm-16,80H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm96-96H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40ZM144,184a8,8,0,0,0,8-8V144a8,8,0,0,0-16,0v32A8,8,0,0,0,144,184Zm64-32H184v-8a8,8,0,0,0-16,0v56H144a8,8,0,0,0,0,16h32a8,8,0,0,0,8-8V168h24a8,8,0,0,0,0-16Zm0,32a8,8,0,0,0-8,8v16a8,8,0,0,0,16,0V192A8,8,0,0,0,208,184Z"/></svg>
+            </span>
+            <h3 class="feature-card__title">Device Enrollment</h3>
+            <p class="feature-card__text">Generate a QR code and passphrase for each publisher, and enroll their device together, in person.</p>
+          </li>
+          <li class="feature-card">
+            <span class="feature-card__icon">
+              <!-- Phosphor chart-bar (fill weight) -->
+              <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1,0-16h8V136a8,8,0,0,1,8-8H72a8,8,0,0,1,8,8v64H96V88a8,8,0,0,1,8-8h32a8,8,0,0,1,8,8V200h16V40a8,8,0,0,1,8-8h40a8,8,0,0,1,8,8V200h8A8,8,0,0,1,232,208Z"/></svg>
+            </span>
+            <h3 class="feature-card__title">Reports &amp; Coverage</h3>
+            <p class="feature-card__text">Review incoming visit reports, see which maps are overdue, and download reports for your congregation’s records.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── Onboarding ───────────────────────────────── -->
+    <section class="onboarding">
+      <div class="container container--wide">
+        <h2 class="onboarding__title">Getting your congregation set up</h2>
+        <ol class="onboarding__steps">
+          <li class="onboarding__step">
+            <article class="step-card">
+              <span class="step-card__badge" aria-hidden="true">1</span>
+              <h3 class="step-card__title">Get in touch with us for a demo</h3>
+              <p class="step-card__text">Request for a demo. When you're ready, tell us a bit about your congregation, and we’ll get your console set up.</p>
+            </article>
+          </li>
+          <li class="onboarding__step">
+            <span class="onboarding__arrow" aria-hidden="true">
+              <!-- Phosphor arrow-right (row) / arrow-down (column) — CSS shows one -->
+              <svg class="onboarding__arrow-right" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+              <svg class="onboarding__arrow-down" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72a8,8,0,0,1,11.32-11.32L120,196.69V40a8,8,0,0,1,16,0V196.69l58.34-58.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+            </span>
+            <article class="step-card">
+              <span class="step-card__badge" aria-hidden="true">2</span>
+              <h3 class="step-card__title">Add your territory and publishers</h3>
+              <p class="step-card__text">Add your territories and maps. Draw boundaries manually or import an existing KML, then add your FSGs and publishers.</p>
+            </article>
+          </li>
+          <li class="onboarding__step">
+            <span class="onboarding__arrow" aria-hidden="true">
+              <!-- Phosphor arrow-right (row) / arrow-down (column) — CSS shows one -->
+              <svg class="onboarding__arrow-right" viewBox="0 0 256 256" fill="currentColor"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"/></svg>
+              <svg class="onboarding__arrow-down" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,149.66l-72,72a8,8,0,0,1-11.32,0l-72-72a8,8,0,0,1,11.32-11.32L120,196.69V40a8,8,0,0,1,16,0V196.69l58.34-58.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+            </span>
+            <article class="step-card">
+              <span class="step-card__badge" aria-hidden="true">3</span>
+              <h3 class="step-card__title">Enroll your publishers’ devices</h3>
+              <p class="step-card__text">Generate a QR code and passphrase for each publisher, and set up their device with them in person.</p>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── Console showcase ─────────────────────────────── -->
+    <section class="console-showcase" id="admin-work">
+      <div class="container container--wide console-showcase__inner">
+        <div class="console-showcase__copy">
+          <h2 class="console-showcase__title">See it in your browser</h2>
+          <p class="console-showcase__caption">No installation, no IT setup. Sign in from any device.</p>
+          <ul class="console-showcase__list">
+            <li class="console-showcase__item">
+              <!-- Phosphor check-circle (fill weight) -->
+              <svg class="console-showcase__check" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              <span>See your territory coverage at a glance</span>
+            </li>
+            <li class="console-showcase__item">
+              <svg class="console-showcase__check" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              <span>Create and assign territories with defined boundaries</span>
+            </li>
+            <li class="console-showcase__item">
+              <svg class="console-showcase__check" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              <span>Keep your congregation’s publishers list up to date</span>
+            </li>
+            <li class="console-showcase__item">
+              <svg class="console-showcase__check" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              <span>Generate QR codes to enroll and encrypt devices</span>
+            </li>
+            <li class="console-showcase__item">
+              <svg class="console-showcase__check" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              <span>Organize your field service groups</span>
+            </li>
+            <li class="console-showcase__item">
+              <svg class="console-showcase__check" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm45.66,85.66-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+              <span>Export maps and upload reports</span>
+            </li>
+          </ul>
+        </div>
+        <!-- One 2640px-wide file (47 KB) covers every screen density, so no srcset.
+             Below the fold, so it's lazy-loaded. -->
+        <img class="console-showcase__image" alt="The Service Sheep web console"
+             src="/assets/console-feature-img.webp"
+             width="660" height="467" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <!-- ── Mobile showcase ──────────────────────────────── -->
+    <section class="mobile-showcase" id="field-work">
+      <div class="container container--wide mobile-showcase__inner">
+        <div class="mobile-showcase__copy">
+          <h2 class="mobile-showcase__title">An app for the field</h2>
+          <ul class="mobile-showcase__list">
+            <li class="mobile-showcase__item">
+              <!-- Phosphor check (bold weight) inside an accent circle -->
+              <span class="mobile-showcase__check" aria-hidden="true"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+              <span>No account, password, or login screen for them to manage. Install and start using it right away.</span>
+            </li>
+            <li class="mobile-showcase__item">
+              <span class="mobile-showcase__check" aria-hidden="true"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+              <span>Offline first — import and download maps before heading to the field.</span>
+            </li>
+            <li class="mobile-showcase__item">
+              <span class="mobile-showcase__check" aria-hidden="true"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+              <span>Sending a field report is one tap. All files are encrypted with the congregation’s unique key.</span>
+            </li>
+            <li class="mobile-showcase__item">
+              <span class="mobile-showcase__check" aria-hidden="true"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+              <span>Designed for ease of use and accessibility.</span>
+            </li>
+            <li class="mobile-showcase__item">
+              <span class="mobile-showcase__check" aria-hidden="true"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+              <span>You enroll each device in person, so no one is left figuring it out alone.</span>
+            </li>
+          </ul>
+          <div class="mobile-showcase__stores">
+            <a class="mobile-showcase__store" href="https://apps.apple.com/ph/app/service-sheep/id6783569922" target="_blank" rel="noopener">
+              <img alt="Download on the App Store" src="/assets/app-store-download-badge.webp"
+                   width="153" height="51" loading="lazy" decoding="async">
+            </a>
+            <a class="mobile-showcase__store" href="https://play.google.com/store/apps/details?id=com.servicesheep.app" target="_blank" rel="noopener">
+              <img alt="Get it on Google Play" src="/assets/google-play-download-badge.webp"
+                   width="171" height="51" loading="lazy" decoding="async">
+            </a>
+          </div>
+        </div>
+        <!-- One 2088px-wide file (109 KB, 4× the 522px display width) covers every
+             screen density, so no srcset. Below the fold, so it's lazy-loaded. -->
+        <img class="mobile-showcase__image" alt="The Service Sheep mobile app"
+             src="/assets/mobile-feature-img.webp"
+             width="522" height="357" loading="lazy" decoding="async">
+      </div>
+    </section>
+
+    <!-- ── CTA ──────────────────────────────────────────────── -->
+    <section class="cta">
+      <div class="container cta__inner">
+        <h2 class="cta__title">Ready to get started?</h2>
+        <p class="cta__caption">See how the console and mobile app work together, and decide whether Service Sheep is the right fit for your congregation.</p>
+        <div class="cta__actions">
+          <ui-button href="/contact" size="large" data-label="Request a Demo"></ui-button>
+        </div>
       </div>
     </section>
   </main>
 
   <!-- ── Footer ───────────────────────────────────────────── -->
   <footer class="site-footer">
-    <div class="container container--lg">
-      <div class="site-footer__brand">Service Sheep</div>
-      <p class="site-footer__text">Questions? Email <a href="mailto:hello@servicesheep.com">hello@servicesheep.com</a></p>
-      <nav class="site-footer__legal" aria-label="Mobile app legal">
-        <span class="site-footer__legal-label">Mobile app:</span>
-        <a href="/app/legal/privacy-policy">Privacy Policy</a>
-        <span class="site-footer__legal-sep" aria-hidden="true">·</span>
-        <a href="/app/legal/terms-of-use">Terms of Use</a>
-      </nav>
+    <div class="container container--wide">
+      <h2 class="site-footer__title">Built for the <span class="site-footer__title-accent">most important</span> work there is.</h2>
+      <p class="site-footer__caption">Service Sheep is a free app that helps your congregation manage territories and track visits. See your assigned map, record each door, note return visits and Bible studies, and send your report to your overseer — all from your phone. No internet needed while you're out. Your congregation decides who has access.</p>
+
+      <hr class="site-footer__divider">
+
+      <div class="site-footer__bottom">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="/">
+            <img src="/favicon-96x96.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+            <span class="site-footer__logo-text">Service <span class="site-footer__logo-sheep">Sheep</span></span>
+          </a>
+          <p class="site-footer__tagline">Territory management for congregations.</p>
+        </div>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__links">
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms-of-use">Terms of Use</a></li>
+            <li><a href="https://console.servicesheep.com" target="_blank" rel="noopener">Log In</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <hr class="site-footer__divider site-footer__divider--bottom">
+      <p class="site-footer__copyright">© 2026 Service Sheep · servicesheep.com</p>
     </div>
   </footer>
 </body>

@@ -1,0 +1,291 @@
+/* contact.css — the /contact page: a single form card under the site header.
+ * Mobile-first on the site's two breakpoints (docs/responsiveness.md): below
+ * 640px the card is top-aligned; from 640px up it's centred in the space
+ * below the header. */
+
+/* The body is a column flex (site-header.css); `main` takes the rest of it. */
+.contact {
+  flex: 1 0 auto;
+  display: flex;
+  padding-block: var(--space-48);
+}
+.contact__inner {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Hugs its content; 1px border sits inside (border-box globally). */
+.contact-card {
+  width: 100%;
+  max-width: 440px; /* as drawn */
+  padding: var(--space-24);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-16);
+}
+
+.contact-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+/* Display Small, section-owned. 125% leading on phones, where it wraps to
+   three lines; the scale's 112% from 640px up. */
+.contact-card__title {
+  font-family: var(--font-family-base);
+  font-weight: 800;
+  font-size: 2rem;
+  line-height: 1.25;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+.contact-card__lead {
+  font: var(--font-body-large);
+  color: var(--color-text-secondary);
+}
+
+/* Off-scale (28 / 18px) as drawn: the design sets these rhythms explicitly. */
+.contact-card__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 28px;
+}
+/* Step 3: checkbox list → phone field. */
+.contact-card__fields--reach { gap: var(--space-24); }
+
+/* Scoped to the host: ui-button also copies its class onto the inner <button>. */
+ui-button.contact-card__next { display: block; margin-top: 28px; }
+
+/* Non-Service-Overseer panel: a 44px accent circle holding a 22px icon,
+   left-aligned 16px above the headline; "Got it" sits 24px below the lead. */
+.contact-card__icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: var(--space-16);
+  border-radius: var(--radius-full);
+  background: var(--color-brand-accent);
+  color: var(--button-tonal-text);
+}
+.contact-card__icon svg { width: 22px; height: 22px; }
+ui-button.contact-card__done { display: block; margin-top: var(--space-24); }
+
+/* Request-sent panel: centred, with the sheep 64px above the card's top edge
+   and overlapping it. The margin keeps the sheep clear of the header on
+   phones (the card is top-aligned there under only 48px of page padding). */
+.contact-card--sent {
+  position: relative; /* anchors the sheep */
+  padding-top: 80px; /* off-scale, as drawn */
+  margin-top: var(--space-64);
+}
+.contact-sent { text-align: center; }
+.contact-sent__sheep {
+  position: absolute;
+  top: -64px;
+  left: 50%;
+  translate: -50% 0;
+  /* drop-shadow, not box-shadow, so the shadows follow the sheep's outline */
+  filter:
+    drop-shadow(0 4px 8px color-mix(in srgb, var(--color-text-primary) 8%, transparent))
+    drop-shadow(0 8px 16px color-mix(in srgb, var(--color-text-primary) 12%, transparent));
+}
+
+/* Step 2's Back / Next: stacked on phones with Next on top (it's first in
+   the DOM); a row of equal halves from 640px, reversed to read Back | Next. */
+.contact-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-top: 28px; /* off-scale, as drawn */
+}
+
+/* Headings take focus on a step change (so screen readers announce it);
+   that's programmatic, not something to draw a ring for. */
+.contact-card__title:focus { outline: none; }
+
+/* ── Checkbox group (step 3) ──
+   Native checkboxes inside a fieldset; the whole row is the <label>, so any
+   tap toggles it. Label / helper match the text field's. Page-level for now —
+   promote to a shared primitive (docs/checkbox.md) if another page needs it. */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.checkbox-group__label {
+  padding: 0;
+  font: var(--font-title-medium);
+  color: var(--field-label);
+}
+.checkbox-group__required { color: var(--color-error); margin-inline-start: var(--space-4); }
+.checkbox-group__helper {
+  margin-top: var(--space-4);
+  font: var(--font-body-small);
+  color: var(--field-helper);
+}
+.checkbox-group__options {
+  display: flex;
+  flex-direction: column;
+  margin-top: 14px; /* off-scale, as drawn */
+}
+
+.checkbox {
+  position: relative; /* anchors the visually hidden input */
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  height: 44px;
+  padding: 10px; /* off-scale, as drawn: centers the 22px box in the 44px row */
+  border-radius: var(--radius-8);
+  cursor: pointer;
+}
+.checkbox:hover,
+.checkbox:active { background: var(--color-surface-variant); }
+
+/* Hidden but still focusable and announced; the box below draws its state. */
+.checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  opacity: 0;
+}
+.checkbox__box {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-4);
+  background: var(--color-surface);
+  color: var(--color-text-on-brand);
+}
+.checkbox__box svg { display: none; width: 14px; height: 14px; }
+.checkbox__input:checked + .checkbox__box {
+  border-color: var(--color-brand-primary);
+  background: var(--color-brand-primary);
+}
+.checkbox__input:checked + .checkbox__box svg { display: block; }
+.checkbox__input:focus-visible + .checkbox__box {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+}
+.checkbox__label {
+  font: var(--font-body-large);
+  color: var(--color-text-primary);
+}
+
+/* Phone field's leading icon + "+63", styled like the placeholder. */
+.phone-prefix {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+.phone-prefix__code {
+  font: var(--font-body-large);
+  color: var(--field-placeholder);
+}
+
+/* ── Step progress indicator ──
+   Three 20px circles joined by 2px lines that touch their edges. Each label
+   is centered under its circle and overflows the 20px node on both sides, so
+   the list is inset just enough to keep "Your role" / "Contact" inside the
+   card. A line takes the state of the step on its right — the <li> it's drawn
+   in — so it's brand up to the current step and subtle after it. */
+.stepper {
+  display: flex;
+  margin: 0 0 28px; /* off-scale, as drawn: matches the card's 28px rhythm */
+  padding: 0 var(--space-16); /* room for the end labels' overhang (~16px for "Your role") */
+  list-style: none;
+}
+.stepper[hidden] { display: none; }
+
+.stepper__step {
+  display: flex;
+  align-items: flex-start;
+}
+.stepper__step + .stepper__step { flex: 1; }
+.stepper__step + .stepper__step::before {
+  content: "";
+  flex: 1;
+  height: 2px;
+  margin-top: 9px; /* centers the 2px line on the 20px circle */
+  background: var(--color-brand-primary);
+}
+.stepper__step[data-state="upcoming"]::before { background: var(--color-border-subtle); }
+
+.stepper__node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  width: 20px;
+}
+.stepper__label {
+  font: var(--font-body-small);
+  color: var(--color-brand-primary);
+  white-space: nowrap;
+}
+.stepper__step[data-state="upcoming"] .stepper__label { color: var(--color-text-disabled); }
+
+.stepper__marker {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+}
+.stepper__marker svg { display: none; width: 10px; height: 10px; }
+.stepper__marker::after {
+  content: "";
+  border-radius: var(--radius-full);
+}
+
+/* Completed: brand fill + on-brand check. */
+.stepper__step[data-state="completed"] .stepper__marker {
+  background: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+}
+.stepper__step[data-state="completed"] .stepper__marker svg { display: block; }
+.stepper__step[data-state="completed"] .stepper__marker::after { content: none; }
+
+/* Current: 1.5px brand border, 2px brand ring at 15%, 10px brand dot. */
+.stepper__step[data-state="current"] .stepper__marker {
+  border: 1.5px solid var(--color-brand-primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-brand-primary) 15%, transparent);
+}
+.stepper__step[data-state="current"] .stepper__marker::after {
+  width: 10px;
+  height: 10px;
+  background: var(--color-brand-primary);
+}
+
+/* Upcoming: 1px subtle border, 6px subtle dot. */
+.stepper__step[data-state="upcoming"] .stepper__marker { border: 1px solid var(--color-border-subtle); }
+.stepper__step[data-state="upcoming"] .stepper__marker::after {
+  width: 6px;
+  height: 6px;
+  background: var(--color-border-subtle);
+}
+
+/* Tablet (640px and up) --------------------------------------- */
+@media (min-width: 640px) {
+  .contact { padding-block: var(--space-64); }
+  .contact__inner { align-items: center; }
+  /* Off-scale padding as drawn (40 top, 36 sides/bottom). */
+  .contact-card { padding: 40px 36px 36px; }
+  .contact-card--sent { padding: 80px 36px 36px; } /* off-scale, as drawn */
+  .contact-card__title { line-height: 1.12; }
+  .contact-card__actions { flex-direction: row-reverse; }
+  .contact-card__actions ui-button { flex: 1; }
+}

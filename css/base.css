@@ -14,6 +14,21 @@ body {
 }
 img, picture, svg { display: block; max-width: 100%; }
 
+/* Page shell. One definition for every page — previously this was redeclared
+   in landing/legal/review/support.css (support.css since replaced by help.css) with two different max-widths.
+   width:100% is required because a page's header and <main> are often flex
+   children of the body column-flex: `margin-inline: auto` cancels the default
+   `stretch`, so without an explicit width they shrink-wrap to their content
+   (which made the support page's reading column jump width as an FAQ opened). */
+.container {
+  width: 100%;
+  max-width: var(--width-prose);
+  margin-inline: auto;
+  padding-inline: var(--space-24);
+}
+.container--content { max-width: var(--width-content); }
+.container--wide    { max-width: var(--width-wide); }
+
 /* Base icon helper assumed by conventions.md */
 .icon { display: inline-flex; line-height: 0; }
 

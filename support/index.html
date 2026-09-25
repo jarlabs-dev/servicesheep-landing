@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Support — Service Sheep</title>
+  <meta name="description" content="Answers to common questions about Service Sheep, the territory console and mobile app for congregations, and how to reach us.">
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Service Sheep">
+  <meta name="theme-color" content="#0e7490">
+
+  <!-- Manrope — self-hosted (no external request, so the page never stalls on a blocked font server) -->
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/site-header.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
+  <link rel="stylesheet" href="/css/faq.css">
+  <link rel="stylesheet" href="/css/help.css">
+
+  <!-- Component registry (modules defer automatically) -->
+  <script type="module" src="/js/main.js"></script>
+  <!-- Mobile nav menu toggle -->
+  <script type="module" src="/js/site-header.js"></script>
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container container--wide site-header__inner">
+      <div class="site-header__brand">
+        <!-- Mobile only (below 1024px) -->
+        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg class="site-header__toggle-icon site-header__toggle-icon--open" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+          <svg class="site-header__toggle-icon site-header__toggle-icon--close" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
+        </button>
+
+        <a class="wordmark" href="/">
+          <span class="wordmark__mark">
+            <img src="/favicon-96x96.png" alt="" width="32" height="32">
+          </span>
+          <span class="wordmark__text">Service <span class="wordmark__sheep">Sheep</span></span>
+        </a>
+      </div>
+
+      <!-- One nav for both layouts: a centered row on desktop, a slide-down panel on mobile.
+           Admin Work / Field Work jump to the home page's showcase sections; Support is this page.
+           Contact shows only on desktop (mobile has the Contact button in the bar);
+           Log In shows only in the mobile menu (desktop has the Log In button). -->
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/#admin-work"><span>Admin Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/#field-work"><span>Field Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--desktop"><a class="site-nav__link" href="/contact"><span>Contact</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="/support" aria-current="page"><span>Support</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--mobile"><a class="site-nav__link" href="https://console.servicesheep.com" target="_blank" rel="noopener"><span>Log In</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__login">
+        <!-- Below 1024px: Contact (primary, small). From 1024px up: Log In (ghost, medium). -->
+        <ui-button class="site-header__contact" href="/contact" size="small" data-label="Contact"></ui-button>
+        <ui-button class="site-header__login-button" href="https://console.servicesheep.com" target="_blank" rel="noopener"
+                   variant="text" data-label="Log In"></ui-button>
+      </div>
+    </div>
+
+    <!-- Dims the page while the mobile menu is open; tapping it closes the menu -->
+    <div class="site-header__scrim" aria-hidden="true"></div>
+  </header>
+
+  <main class="container help">
+    <!-- ── Hero ─────────────────────────────────────────────── -->
+    <section class="help-hero">
+      <h1 class="help-hero__title">How can we help?</h1>
+      <p class="help-hero__lead">Find quick answers about Service Sheep below, or send us a message and we’ll get back to you.</p>
+      <div class="help-hero__actions">
+        <ui-button href="mailto:support@servicesheep.com" size="large" data-label="Email us">
+          <svg slot="leading" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>
+        </ui-button>
+      </div>
+    </section>
+
+    <!-- ── FAQ (drafted from the home page and contact flow; review before launch) ── -->
+    <section class="faq" aria-labelledby="faq-about">
+      <h2 class="faq__heading" id="faq-about">About Service Sheep</h2>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>What is Service Sheep?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Service Sheep has two parts that work together: a web console where your congregation manages its territories, maps, publishers and reports, and a mobile app publishers use in the field to work their assigned maps, record visits and send their reports to their overseer.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Who is it for?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Congregations. Each congregation gets a single console, set up for its Service Overseer from day one. From there, you grant each publisher exactly the features they need. Publishers use the mobile app on their own phones.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How much does it cost?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <!-- [EDIT] Console pricing isn't stated anywhere on the site yet. Replace this answer once decided. -->
+          <p>The mobile app is free for publishers. For the console, <a href="/contact">get in touch</a> and we’ll walk you through it.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="faq" aria-labelledby="faq-start">
+      <h2 class="faq__heading" id="faq-start">Getting started</h2>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How do we get Service Sheep for our congregation?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p><a href="/contact">Request a demo</a> and tell us a bit about your congregation. When you’re ready, we’ll set up your console. Then you add your territories, maps, field service groups and publishers.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>I’m not the Service Overseer. Can I still sign up?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Setup goes through your congregation’s Service Overseer, so they’re best placed to help. We’d recommend reaching out to them directly. Once your congregation is set up, they can give you access to what you need.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Do we need to install anything?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Not for the console. It runs in your browser (Chrome, Firefox, Safari or Edge), with nothing to download or update and no IT setup. Publishers install the mobile app from the App Store or Google Play.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Can we import our existing territory maps?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Yes. You can draw map boundaries by hand in the console, or import an existing KML file.</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="faq" aria-labelledby="faq-app">
+      <h2 class="faq__heading" id="faq-app">Publishers and the app</h2>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How do publishers get set up on the app?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>From the console, you generate a QR code and passphrase for each publisher, then enroll their device together, in person. It’s a one-time setup that links their phone to your congregation.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>How do maps get to publishers and back?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>It works just like printed territory maps, only digital:</p>
+          <ol>
+            <li><strong>The overseer hands out the map.</strong> Instead of printing it, they export the map from the console as a .ssmap file and send it to the publisher.</li>
+            <li><strong>The publisher imports it.</strong> They open the .ssmap file in the app, which then downloads the map once. This step needs an internet connection.</li>
+            <li><strong>The publisher works the territory.</strong> In the field, no internet is needed. Each door, return visit and Bible study is recorded in the app.</li>
+            <li><strong>The publisher returns the map.</strong> Once the map is worked, they export a .ssrep file and send it back to their overseer, just like handing back a marked-up printed map.</li>
+            <li><strong>The overseer uploads it.</strong> They upload the .ssrep file to the console, which keeps the congregation’s online records up to date.</li>
+          </ol>
+          <p>The cycle repeats every time the territory is worked.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Does the app work without internet?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <p>Yes, once the map is downloaded. After a publisher imports a .ssmap file, the app needs an internet connection one time to download the map. From then on, they can work it in the field with no internet at all.</p>
+        </div>
+      </details>
+
+      <details class="faq__item">
+        <summary class="faq__question">
+          <span>Who can see our congregation’s information?</span>
+          <svg class="faq__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+        </summary>
+        <div class="faq__answer">
+          <!-- [EDIT] Optional: add where congregation data is stored, and which countries/languages are supported. -->
+          <p>You decide. There are no fixed roles: you grant each publisher exactly the permissions they need, person by person. Personal notes a publisher writes in the app stay on their device and are never included in the .ssrep files they send back.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ── Mobile app help ─────────────────────────────────── -->
+    <section class="help-app-card" aria-labelledby="help-app-title">
+      <div>
+        <h2 class="help-app-card__title" id="help-app-title">Using the mobile app?</h2>
+        <p class="help-app-card__text">Find answers about maps, visits and reports in the app’s own FAQ.</p>
+      </div>
+      <ui-button href="/app/support" variant="outlined" data-label="App help"></ui-button>
+    </section>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="site-footer site-footer--compact">
+    <div class="container container--wide">
+      <div class="site-footer__bottom">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="/">
+            <img src="/favicon-96x96.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+            <span class="site-footer__logo-text">Service <span class="site-footer__logo-sheep">Sheep</span></span>
+          </a>
+          <p class="site-footer__tagline">Territory management for congregations.</p>
+        </div>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__links">
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms-of-use">Terms of Use</a></li>
+            <li><a href="https://console.servicesheep.com" target="_blank" rel="noopener">Log In</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <hr class="site-footer__divider site-footer__divider--bottom">
+      <p class="site-footer__copyright">© 2026 Service Sheep · servicesheep.com</p>
+    </div>
+  </footer>
+</body>
+</html>

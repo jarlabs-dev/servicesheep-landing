@@ -1,0 +1,65 @@
+/* help.css — page-level layout for the website support page (/support).
+ * Built only from tokens.css custom properties (no hard-coded colours/type).
+ * BEM blocks here: .help (page), .help-hero, .help-app-card. The accordion
+ * itself is the shared .faq block in faq.css. Single-column prose, so sizes
+ * are fluid clamp() with no breakpoints (see docs/responsiveness.md). */
+
+/* ── Reading shell ──────────────────────────────────────────── */
+.help {
+  padding-block: clamp(var(--space-48), 6vw, var(--space-64));
+}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+.help-hero__title {
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.25rem);
+  line-height: 1.25;
+  color: var(--color-text-primary);
+}
+.help-hero__lead {
+  margin-top: var(--space-12);
+  max-width: 52ch;
+  font: var(--font-body-large);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.help-hero__actions {
+  margin-top: var(--space-24);
+  display: inline-flex;
+}
+
+/* ── FAQ groups ─────────────────────────────────────────────── */
+/* Each group is its own .faq section; the shared block's bottom padding is
+   meant for a single list, so groups sit closer and the heading's own
+   top padding + divider does the separating. */
+.help .faq {
+  padding-bottom: 0;
+  margin-top: clamp(var(--space-32), 4vw, var(--space-48));
+}
+.help .faq__answer a { color: var(--color-brand-link); }
+
+/* ── Mobile app card ────────────────────────────────────────── */
+.help-app-card {
+  margin-top: clamp(var(--space-48), 6vw, var(--space-64));
+  padding: var(--space-24);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-variant);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-16);
+}
+.help-app-card__title {
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.4;
+  color: var(--color-text-primary);
+}
+.help-app-card__text {
+  margin-top: var(--space-4);
+  font: var(--font-body-medium);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,136 @@
+/* site-footer.css — the dark closing footer, shared by index.html and contact/.
+ * Moved verbatim out of landing.css; load it after site-header.css and
+ * before the page's own stylesheet. */
+
+/* ── Footer ────────────────────────────────────────────────── */
+/* Dark closing band: a centred value/mission banner, a divider, then the
+   logo + tagline beside the quick links, a second divider and the copyright.
+   The banner stays centred at every width; the bottom section stacks
+   left-aligned on phones and becomes a space-between row from 640. */
+.site-footer {
+  padding-block: var(--space-48) var(--space-32);
+  background: var(--color-text-primary); /* Neutral 900 — no surface token for it */
+}
+
+/* Section-owned headline: ExtraBold, 0% tracking, as drawn. The desktop
+   64px sits above the type scale's largest step (Display L, 44px) — it's the
+   drawn size. Steps 32 → 44 → 64 with leading opening up as it shrinks. */
+.site-footer__title {
+  max-width: 880px;
+  margin-inline: auto;
+  font-family: var(--font-family-base);
+  font-weight: 800;
+  font-size: 2rem;    /* 32px */
+  line-height: 1.25;  /* 125%, phone step */
+  letter-spacing: 0;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-surface);
+}
+.site-footer__title-accent { color: var(--color-brand-accent-splash); }
+
+.site-footer__caption {
+  max-width: 680px;
+  margin: var(--space-16) auto 0;
+  font: var(--font-body-large);
+  text-align: center;
+  color: var(--color-text-disabled);
+}
+
+.site-footer__divider {
+  margin: var(--space-32) 0;
+  border: 0;
+  border-top: 1px solid var(--color-text-secondary);
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+/* Logo — its own element rather than .wordmark, whose header rules
+   (32px icon and 12px gap at desktop, regular "Service") don't apply here. */
+.site-footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  text-decoration: none;
+  color: var(--color-surface);
+}
+.site-footer__logo img { display: block; width: 28px; height: 28px; }
+.site-footer__logo-text { font: var(--font-title-large); font-weight: 700; }
+.site-footer__logo-sheep { font-weight: 600; }
+
+.site-footer__tagline {
+  max-width: 280px;
+  margin-top: var(--space-12);
+  font: var(--font-body-medium);
+  color: var(--color-text-muted);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-24);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.site-footer__links a {
+  display: inline-block;
+  /* Grows the 20px line to a 44px touch target; the negative margin keeps
+     the drawn layout unchanged. */
+  padding-block: var(--space-12);
+  margin-block: calc(-1 * var(--space-12));
+  font: var(--font-body-medium);
+  color: var(--color-text-disabled);
+  text-decoration: none;
+}
+.site-footer__links a:hover { color: var(--color-surface); }
+.site-footer__logo:focus-visible,
+.site-footer__links a:focus-visible {
+  /* Brand teal disappears on Neutral 900; the accent reads on dark. */
+  outline: 2px solid var(--color-brand-accent-splash);
+  outline-offset: 2px;
+}
+
+.site-footer__copyright {
+  font: var(--font-body-small);
+  color: var(--color-text-secondary);
+}
+.site-footer__divider--bottom { margin-bottom: var(--space-24); }
+
+/* Tablet (640px and up) --------------------------------------- */
+@media (min-width: 640px) {
+  .site-footer { padding-block: var(--space-64) var(--space-48); }
+  .site-footer__title {
+    font-size: 2.75rem; /* 44px */
+    line-height: 1.2;   /* 120% */
+  }
+  .site-footer__caption { margin-top: var(--space-24); }
+  .site-footer__divider { margin-block: var(--space-48); }
+  .site-footer__divider--bottom { margin-bottom: var(--space-24); }
+  .site-footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  /* Off-scale centering offset: (28 − 20) / 2 lines the 20px links up with
+     the middle of the 28px logo row. */
+  .site-footer__nav { margin-top: 4px; }
+  .site-footer__links { justify-content: flex-end; }
+}
+
+/* Desktop (1024px and up) ------------------------------------- */
+@media (min-width: 1024px) {
+  .site-footer__title { font-size: 4rem; } /* 64px — as drawn */
+}
+
+/* Compact variant (contact page): no headline, caption or first divider —
+   just logo/links, divider, copyright. Top padding matches the gap the full
+   footer leaves between its first divider and the logo row (32 → 48). */
+.site-footer--compact { padding-top: var(--space-32); }
+@media (min-width: 640px) {
+  .site-footer--compact { padding-top: var(--space-48); }
+}

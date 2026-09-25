@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Support — Service Sheep</title>
+  <title>App Support — Service Sheep</title>
+  <meta name="description" content="Help and frequently asked questions for the Service Sheep mobile app.">
 
   <!-- Favicons / PWA -->
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
@@ -22,30 +23,69 @@
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
-  <link rel="stylesheet" href="/css/support.css">
+  <link rel="stylesheet" href="/css/site-header.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
+  <link rel="stylesheet" href="/css/faq.css">
+  <link rel="stylesheet" href="/css/help.css">
 
-  <!-- Component registry (modules defer automatically) — only used for <ui-button> -->
+  <!-- Component registry (modules defer automatically) -->
   <script type="module" src="/js/main.js"></script>
+  <!-- Mobile nav menu toggle -->
+  <script type="module" src="/js/site-header.js"></script>
 </head>
 <body>
   <!-- ── Header ─────────────────────────────────────────────── -->
-  <header class="container site-header">
-    <a class="wordmark" href="/">
-      <span class="wordmark__mark">
-        <img src="/favicon-96x96.png" alt="" width="40" height="40">
-      </span>
-      <span class="wordmark__text"><span class="wordmark__service">Service</span> Sheep</span>
-    </a>
+  <header class="site-header">
+    <div class="container container--wide site-header__inner">
+      <div class="site-header__brand">
+        <!-- Mobile only (below 1024px) -->
+        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg class="site-header__toggle-icon site-header__toggle-icon--open" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+          <svg class="site-header__toggle-icon site-header__toggle-icon--close" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
+        </button>
+
+        <a class="wordmark" href="/">
+          <span class="wordmark__mark">
+            <img src="/favicon-96x96.png" alt="" width="32" height="32">
+          </span>
+          <span class="wordmark__text">Service <span class="wordmark__sheep">Sheep</span></span>
+        </a>
+      </div>
+
+      <!-- One nav for both layouts: a centered row on desktop, a slide-down panel on mobile.
+           Admin Work / Field Work jump to the home page's showcase sections; Support is highlighted (this is its app sub-page).
+           Contact shows only on desktop (mobile has the Contact button in the bar);
+           Log In shows only in the mobile menu (desktop has the Log In button). -->
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/#admin-work"><span>Admin Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/#field-work"><span>Field Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--desktop"><a class="site-nav__link" href="/contact"><span>Contact</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link site-nav__link--active" href="/support"><span>Support</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--mobile"><a class="site-nav__link" href="https://console.servicesheep.com" target="_blank" rel="noopener"><span>Log In</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__login">
+        <!-- Below 1024px: Contact (primary, small). From 1024px up: Log In (ghost, medium). -->
+        <ui-button class="site-header__contact" href="/contact" size="small" data-label="Contact"></ui-button>
+        <ui-button class="site-header__login-button" href="https://console.servicesheep.com" target="_blank" rel="noopener"
+                   variant="text" data-label="Log In"></ui-button>
+      </div>
+    </div>
+
+    <!-- Dims the page while the mobile menu is open; tapping it closes the menu -->
+    <div class="site-header__scrim" aria-hidden="true"></div>
   </header>
 
-  <main class="container">
-    <!-- ── Support hero ─────────────────────────────────────── -->
-    <section class="support-hero">
-      <h1 class="support-hero__title">Support</h1>
-      <p class="support-hero__lead">
+  <main class="container help">
+    <!-- ── Hero ─────────────────────────────────────── -->
+    <section class="help-hero">
+      <h1 class="help-hero__title">Support</h1>
+      <p class="help-hero__lead">
         Have a question or need a hand with the Service Sheep app? Send us a message and we'll get back to you. You may also find a quick answer in the FAQs below.
       </p>
-      <div class="support-hero__actions">
+      <div class="help-hero__actions">
         <ui-button href="mailto:support@servicesheep.com" size="large" data-label="Email us">
           <svg slot="leading" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48ZM203.43,64,128,133.15,52.57,64ZM216,192H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Z"/></svg>
         </ui-button>
@@ -300,16 +340,28 @@
   </main>
 
   <!-- ── Footer ───────────────────────────────────────────── -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="site-footer__brand">Service Sheep</div>
-      <p class="site-footer__text">Questions? Email <a href="mailto:support@servicesheep.com">support@servicesheep.com</a></p>
-      <nav class="site-footer__legal" aria-label="Mobile app legal">
-        <span class="site-footer__legal-label">Mobile app:</span>
-        <a href="/app/legal/privacy-policy">Privacy Policy</a>
-        <span class="site-footer__legal-sep" aria-hidden="true">·</span>
-        <a href="/app/legal/terms-of-use">Terms of Use</a>
-      </nav>
+  <footer class="site-footer site-footer--compact">
+    <div class="container container--wide">
+      <div class="site-footer__bottom">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="/">
+            <img src="/favicon-96x96.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+            <span class="site-footer__logo-text">Service <span class="site-footer__logo-sheep">Sheep</span></span>
+          </a>
+          <p class="site-footer__tagline">Territory management for congregations.</p>
+        </div>
+        <!-- Links the MOBILE APP's legal pages (App Store requirement), not the website's -->
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__links">
+            <li><a href="/app/legal/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/app/legal/terms-of-use">Terms of Use</a></li>
+            <li><a href="https://console.servicesheep.com" target="_blank" rel="noopener">Log In</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <hr class="site-footer__divider site-footer__divider--bottom">
+      <p class="site-footer__copyright">© 2026 Service Sheep · servicesheep.com</p>
     </div>
   </footer>
 </body>

@@ -1,0 +1,76 @@
+/* faq.css — the .faq accordion (native <details>/<summary>), shared by the
+ * website support page (/support) and the mobile app support page (/app/support).
+ * Built only from tokens.css custom properties (no hard-coded colours/type). */
+
+/* ── FAQ ────────────────────────────────────────────────────── */
+.faq { padding-bottom: clamp(var(--space-48), 6vw, var(--space-64)); }
+.faq__heading {
+  font: var(--font-headline-small);
+  color: var(--color-text-primary);
+  padding-top: clamp(var(--space-32), 4vw, var(--space-48));
+  border-top: 1px solid var(--color-border-subtle);
+  margin-bottom: var(--space-16);
+}
+
+.faq__item {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+.faq__item + .faq__item { margin-top: var(--space-12); }
+
+.faq__question {
+  list-style: none; /* drop the native disclosure triangle (Firefox) */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  padding: var(--space-16) var(--space-24);
+  cursor: pointer;
+  font: var(--font-title-medium);
+  color: var(--color-text-primary);
+  transition: background-color 120ms ease;
+}
+.faq__question::-webkit-details-marker { display: none; } /* Safari/Chrome */
+.faq__question:hover { background: var(--color-surface-variant); }
+.faq__question:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--color-brand-primary) 45%, transparent);
+}
+.faq__question > span { flex: 1; }
+
+.faq__caret {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-top: var(--space-4);
+  color: var(--color-icon-muted);
+  transition: transform 180ms ease;
+}
+.faq__item[open] .faq__caret { transform: rotate(180deg); }
+
+.faq__answer {
+  padding: 0 var(--space-24) var(--space-24);
+}
+.faq__answer p {
+  font: var(--font-body-medium);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.faq__answer p + p,
+.faq__answer p + :is(ul, ol),
+.faq__answer :is(ul, ol) + p { margin-top: var(--space-12); }
+.faq__answer ul,
+.faq__answer ol {
+  margin: 0;
+  padding-left: var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.faq__answer li {
+  font: var(--font-body-medium);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+.faq__answer strong { color: var(--color-text-primary); font-weight: 700; }

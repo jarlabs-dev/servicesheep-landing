@@ -88,14 +88,75 @@
   --button-destructive-ghost-text: #dc2626;
   --button-destructive-ghost-text-pressed: #991b1b;
 
-  /* ── Radius / shadow ───────────────────────────────────────
-     From docs/tokens.md (carried over from the source design
-     system; promote to dedicated docs when those scales exist). */
-  --radius-field: 12px;
-  --radius-button: 16px;
-  --radius-card: 16px;
-  --radius-toast: 16px;
+  /* ── Field (text field / dropdown — docs/semantic-tokens.md) ── */
+  --field-label: #334155;       /* Neutral/700 */
+  --field-border: #f1f5f9;      /* Neutral/100 */
+  --field-placeholder: #94a3b8; /* Neutral/400 */
+  --field-icon: #94a3b8;        /* Neutral/400 */
+  --field-helper: #64748b;      /* Neutral/500 */
+
+  /* ── Spacing (docs/spacing.md) ──────────────────────────────
+     A 9-step scale on a 4px grid, following Refactoring UI: steps grow
+     proportionally so adjacent values stay visually distinguishable, and
+     the limited set makes "which value?" a choice between a few options
+     rather than an open question.
+
+     Named by pixel value — the name IS the measurement, so reading the CSS
+     needs no lookup. Use these for padding, margin and gap. A value that
+     isn't on the scale needs a comment saying why (see the two exceptions
+     in landing.css: derived touch-target math, and a component mirror). */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-96: 96px;
+
+  /* ── Radius (docs/scales.md) ────────────────────────────────
+     Four steps on the same 4px grid as spacing, plus a pill value.
+     Pick by the size of the box: the larger the surface, the larger
+     the radius it can carry without looking soft. */
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-full: 999px;
+
+  /* Semantic aliases. components.css and the donation site reference
+     these names, so they stay — they now point at the scale rather
+     than carrying their own literals. */
+  --radius-field: var(--radius-12);
+  --radius-button: var(--radius-16);
+  --radius-card: var(--radius-16);
+  --radius-toast: var(--radius-16);
+
+  /* ── Layer / z-index (docs/scales.md) ───────────────────────────────────────
+     Named layers so stacking is a decision, not an accident. Gaps
+     between steps leave room to slot something in without renumbering. */
+  --z-base: 0;
+  --z-raised: 1;
+  --z-sticky: 10;    /* sticky site header */
+  --z-backdrop: 100; /* scrims behind menus and modals */
+  --z-overlay: 101;  /* the menu or modal itself */
+  --z-toast: 1000;   /* always on top */
+
+  /* ── Content widths (docs/scales.md) ────────────────────────────────────────
+     Three measures. `prose` is a reading column sized for comfortable
+     line length; `content` suits multi-column layouts; `wide` is the
+     full site shell the header and hero span. */
+  --width-prose: 720px;
+  --width-content: 960px;
+  --width-wide: 1248px;
+
+  /* ── Shadow ────────────────────────────────────────────────
+     Carried over from the source design system; promote to a
+     dedicated doc if more elevations appear. */
   --shadow-cards-resting: 0 1px 2px rgb(15 23 42 / 0.04), 0 4px 12px rgb(15 23 42 / 0.08);
+  /* Dropdown menu card: colorTextPrimary at 12%, y 4, blur 12. */
+  --shadow-menu: 0 4px 12px rgb(15 23 42 / 0.12);
 
   /* ── Typography (from docs/typography.md) ───────────────────
      `font` shorthand: weight size/line-height family.
@@ -106,13 +167,32 @@
      if the design calls for it. */
   --font-family-base: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  --font-display-small: 700 2.25rem/1.22 var(--font-family-base);
+  /* Display — the brand display treatment: heavier (800) and tighter (-1%
+     tracking, closer leading) than Headline. Used by the hero. The `font`
+     shorthand can't carry letter-spacing, so pair these with
+     `letter-spacing: var(--tracking-display)`. */
+  --font-display-large: 800 2.75rem/1.08 var(--font-family-base);
+  --font-display-medium: 800 2.375rem/1.10 var(--font-family-base);
+  --font-display-small: 800 2rem/1.12 var(--font-family-base);
+  --tracking-display: -0.01em;
+
+  /* Headline — section and page headings: Bold 700, no tracking, open leading.
+     headline-xl was previously called display-small; it kept its values and
+     changed name when Display became its own treatment.
+
+     Exception: headline-xxl is ExtraBold (800) while the rest of the tier is
+     700. What separates Display from Headline visually is the −1% tracking,
+     not the weight; at 40px, Bold reads under-weighted next to the 44px hero.
+     Display stays hero-only and stays the only tier with negative tracking. */
+  --font-headline-xxl: 800 2.5rem/1.20 var(--font-family-base);
+  --font-headline-xl: 700 2.25rem/1.22 var(--font-family-base);
   --font-headline-large: 700 2rem/1.25 var(--font-family-base);
   --font-headline-medium: 700 1.75rem/1.29 var(--font-family-base);
   --font-headline-small: 700 1.5rem/1.33 var(--font-family-base);
   --font-title-large: 600 1.375rem/1.27 var(--font-family-base);
   --font-title-medium: 600 1rem/1.5 var(--font-family-base);
   --font-title-small: 600 0.875rem/1.43 var(--font-family-base);
+  --font-lead: 500 1.125rem/1.6 var(--font-family-base);
   --font-body-large: 500 1rem/1.5 var(--font-family-base);
   --font-body-medium: 500 0.875rem/1.43 var(--font-family-base);
   --font-body-small: 500 0.75rem/1.5 var(--font-family-base);

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Service Sheep</title>
+  <meta name="description" content="Get in touch with the Service Sheep team.">
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Service Sheep">
+  <meta name="theme-color" content="#0e7490">
+
+  <!-- Manrope — self-hosted (no external request, so the page never stalls on a blocked font server) -->
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/site-header.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
+  <link rel="stylesheet" href="/css/contact.css">
+
+  <!-- Component registry (modules defer automatically) -->
+  <script type="module" src="/js/main.js"></script>
+  <!-- Mobile nav menu toggle -->
+  <script type="module" src="/js/site-header.js"></script>
+  <!-- Step switching, field checks, and sending the request (EmailJS) -->
+  <script type="module" src="/js/contact.js"></script>
+  <!-- Invisible reCAPTCHA v2 — js/contact.js renders it (badge bottom-right) once this loads -->
+  <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&amp;render=explicit" async defer></script>
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container container--wide site-header__inner">
+      <div class="site-header__brand">
+        <!-- Mobile only (below 1024px) -->
+        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg class="site-header__toggle-icon site-header__toggle-icon--open" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+          <svg class="site-header__toggle-icon site-header__toggle-icon--close" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
+        </button>
+
+        <a class="wordmark" href="/">
+          <span class="wordmark__mark">
+            <img src="/favicon-96x96.png" alt="" width="32" height="32">
+          </span>
+          <span class="wordmark__text">Service <span class="wordmark__sheep">Sheep</span></span>
+        </a>
+      </div>
+
+      <!-- One nav for both layouts: a centered row on desktop, a slide-down panel on mobile.
+           Admin Work / Field Work jump to the home page's showcase sections; Contact is this page; Support opens /support.
+           Contact shows only on desktop (mobile has the Contact button in the bar);
+           Log In shows only in the mobile menu (desktop has the Log In button). -->
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/#admin-work"><span>Admin Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/#field-work"><span>Field Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--desktop"><a class="site-nav__link site-nav__link--active" href="/contact" aria-current="page"><span>Contact</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/support"><span>Support</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--mobile"><a class="site-nav__link" href="https://console.servicesheep.com" target="_blank" rel="noopener"><span>Log In</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__login">
+        <!-- Below 1024px: Contact (primary, small). From 1024px up: Log In (ghost, medium). -->
+        <ui-button class="site-header__contact" href="/contact" size="small" data-label="Contact"></ui-button>
+        <ui-button class="site-header__login-button" href="https://console.servicesheep.com" target="_blank" rel="noopener"
+                   variant="text" data-label="Log In"></ui-button>
+      </div>
+    </div>
+
+    <!-- Dims the page while the mobile menu is open; tapping it closes the menu -->
+    <div class="site-header__scrim" aria-hidden="true"></div>
+  </header>
+
+  <main class="contact">
+    <div class="container contact__inner">
+      <form class="contact-card" id="contact-form" novalidate>
+        <!-- Step progress: shown on steps 2 and 3 only. js/contact.js sets each
+             step's data-state (completed / current / upcoming). -->
+        <ol class="stepper" aria-label="Progress" hidden>
+          <li class="stepper__step" data-state="completed">
+            <span class="stepper__node">
+              <span class="stepper__marker">
+                <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg>
+              </span>
+              <span class="stepper__label">Your role<span class="stepper__status visually-hidden"></span></span>
+            </span>
+          </li>
+          <li class="stepper__step" data-state="current">
+            <span class="stepper__node">
+              <span class="stepper__marker">
+                <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg>
+              </span>
+              <span class="stepper__label">Congregation<span class="stepper__status visually-hidden"></span></span>
+            </span>
+          </li>
+          <li class="stepper__step" data-state="upcoming">
+            <span class="stepper__node">
+              <span class="stepper__marker">
+                <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg>
+              </span>
+              <span class="stepper__label">Contact<span class="stepper__status visually-hidden"></span></span>
+            </span>
+          </li>
+        </ol>
+
+        <!-- Step 1: name + role -->
+        <div class="contact-step" data-step="1">
+          <div class="contact-card__header">
+            <h1 class="contact-card__title" tabindex="-1">Hello! It’s nice to have you here.</h1>
+            <p class="contact-card__lead">Tell us a little about yourself so we can connect you with the right person.</p>
+          </div>
+
+          <div class="contact-card__fields">
+            <ui-text-field name="name" label="Your name" placeholder="Full name"
+                           maxlength="80" autocomplete="name" required></ui-text-field>
+
+            <ui-select name="role" label="Your role" placeholder="Select your role" required
+                       helper-text="We use this only to route your message to the right person.">
+              <option value="service-overseer">Service Overseer</option>
+              <option value="elder">Elder</option>
+              <option value="pioneer">Pioneer</option>
+              <option value="publisher">Publisher</option>
+              <option value="other">Other</option>
+            </ui-select>
+          </div>
+
+          <ui-button class="contact-card__next" type="button" full-width disabled data-action="next" data-label="Next"></ui-button>
+        </div>
+
+        <!-- Not a Service Overseer: steps 2–3 are skipped for this. js/contact.js
+             fills in the name and the role sentence. -->
+        <div class="contact-step" data-step="redirect" hidden>
+          <span class="contact-card__icon">
+            <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M253.88,108.11l-25.53-51a20,20,0,0,0-26.83-9L178.34,59.7,131.7,44.58a12.14,12.14,0,0,0-7.4,0L77.66,59.7,54.48,48.11a20,20,0,0,0-26.83,9L2.12,108.11a20,20,0,0,0,9,26.83l26.67,13.34,51.18,37.41A12.15,12.15,0,0,0,93,187.62l62,16a12.27,12.27,0,0,0,3,.38,12,12,0,0,0,8.48-3.52l52.62-52.62,25.83-12.92a20,20,0,0,0,8.95-26.83Zm-58.12,29.15-27.52-26a12,12,0,0,0-16.76.26c-9.66,9.74-25.06,16.81-40.81,9.55l38.19-37h22.72l25.81,51.63ZM47.32,71.37,60.59,78l-22,43.9-13.27-6.63Zm107,107.3L101.23,165l-42-30.66L85.17,82.5,128,68.61l1.69.55L90,107.68l-.13.12a20,20,0,0,0,3.4,31c20.95,13.39,46,12.07,66.33-2.73l19.2,18.15Zm63-56.77-22-43.9,13.27-6.63,21.95,43.9ZM118.55,219a12,12,0,0,1-14.62,8.62l-26.6-6.87a12,12,0,0,1-4.08-1.93L48.92,201a12,12,0,0,1,14.16-19.37l22.47,16.42,24.38,6.29A12,12,0,0,1,118.55,219Z"/></svg>
+          </span>
+          <div class="contact-card__header">
+            <h1 class="contact-card__title" tabindex="-1">Thanks, <span data-fill="name"></span>.</h1>
+            <p class="contact-card__lead"><span data-fill="role-sentence">Your Service Overseer is best placed to help set up your congregation.</span><br>We’d recommend reaching out to them directly.</p>
+          </div>
+
+          <ui-button class="contact-card__done" href="/" full-width data-label="Got it"></ui-button>
+        </div>
+
+        <!-- Step 2: congregation -->
+        <div class="contact-step" data-step="2" hidden>
+          <div class="contact-card__header">
+            <h1 class="contact-card__title" tabindex="-1">What’s your congregation?</h1>
+            <p class="contact-card__lead">So we can route you correctly.</p>
+          </div>
+
+          <div class="contact-card__fields">
+            <ui-text-field name="congregation" label="Congregation name" placeholder="e.g. Ridgeview English"
+                           maxlength="50" required>
+              <svg slot="prefix" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M240,208H224V136l2.34,2.34A8,8,0,0,0,237.66,127L139.31,28.68a16,16,0,0,0-22.62,0L18.34,127a8,8,0,0,0,11.32,11.31L32,136v72H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM48,120l80-80,80,80v88H160V152a8,8,0,0,0-8-8H104a8,8,0,0,0-8,8v56H48Zm96,88H112V160h32Z"/></svg>
+            </ui-text-field>
+          </div>
+
+          <!-- Next comes first so it's on top on phones; from 640px the row is
+               reversed to read Back | Next. -->
+          <div class="contact-card__actions">
+            <ui-button type="button" full-width disabled data-action="next" data-label="Next"></ui-button>
+            <ui-button type="button" full-width variant="outlined" data-action="back" data-label="Back"></ui-button>
+          </div>
+        </div>
+
+        <!-- Step 3: how to reach you -->
+        <div class="contact-step" data-step="3" hidden>
+          <div class="contact-card__header">
+            <h1 class="contact-card__title" tabindex="-1">How should we reach you?</h1>
+            <p class="contact-card__lead">Let us know your preferred way to be reached.</p>
+          </div>
+
+          <div class="contact-card__fields contact-card__fields--reach">
+            <!-- Native checkboxes: at least one is required (enforced in js/contact.js) -->
+            <fieldset class="checkbox-group" aria-describedby="contact-method-helper">
+              <legend class="checkbox-group__label">Preferred contact method<span class="checkbox-group__required" aria-hidden="true">*</span></legend>
+              <p class="checkbox-group__helper" id="contact-method-helper">Select all that apply</p>
+              <div class="checkbox-group__options">
+                <label class="checkbox">
+                  <input class="checkbox__input" type="checkbox" name="contact-method" value="whatsapp">
+                  <span class="checkbox__box"><svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+                  <span class="checkbox__label">WhatsApp</span>
+                </label>
+                <label class="checkbox">
+                  <input class="checkbox__input" type="checkbox" name="contact-method" value="viber">
+                  <span class="checkbox__box"><svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+                  <span class="checkbox__label">Viber</span>
+                </label>
+                <label class="checkbox">
+                  <input class="checkbox__input" type="checkbox" name="contact-method" value="imessage">
+                  <span class="checkbox__box"><svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+                  <span class="checkbox__label">iMessage</span>
+                </label>
+                <label class="checkbox">
+                  <input class="checkbox__input" type="checkbox" name="contact-method" value="sms">
+                  <span class="checkbox__box"><svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M232.49,80.49l-128,128a12,12,0,0,1-17,0l-56-56a12,12,0,1,1,17-17L96,183,215.51,63.51a12,12,0,0,1,17,17Z"/></svg></span>
+                  <span class="checkbox__label">Regular text message</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- PH mobile number, formatted XXX XXX XXXX by js/contact.js (which also
+                 caps it at 10 digits — no maxlength, so a pasted "+63 …" isn't cut short) -->
+            <ui-text-field name="phone" label="Phone number" placeholder="9XX XXX XXXX"
+                           type="tel" autocomplete="tel-national" required>
+              <span slot="prefix" class="phone-prefix">
+                <svg aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"/></svg>
+                <span class="phone-prefix__code">+63</span>
+              </span>
+            </ui-text-field>
+          </div>
+
+          <!-- Continue runs the invisible reCAPTCHA, then sends the request via EmailJS -->
+          <div class="contact-card__actions">
+            <ui-button type="button" full-width disabled data-action="next" data-label="Continue"></ui-button>
+            <ui-button type="button" full-width variant="outlined" data-action="back" data-label="Back"></ui-button>
+          </div>
+        </div>
+        <!-- Request sent: the sheep sits over the card's top edge (css/contact.css) -->
+        <div class="contact-step contact-sent" data-step="sent" hidden>
+          <img class="contact-sent__sheep" src="/assets/happy_sheep.svg" alt="" width="164" height="129" decoding="async">
+          <div class="contact-card__header">
+            <h1 class="contact-card__title" tabindex="-1">Thanks! You’re all set.</h1>
+            <p class="contact-card__lead">Someone will be in touch with you shortly to help you get your congregation set up.</p>
+          </div>
+          <ui-button class="contact-card__done" href="/" variant="outlined" size="large" full-width data-label="Close"></ui-button>
+        </div>
+
+        <!-- Invisible reCAPTCHA's host (its badge is fixed bottom-right). Outside
+             the steps, so a hidden step never hides the badge. -->
+        <div id="recaptcha"></div>
+      </form>
+    </div>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="site-footer site-footer--compact">
+    <div class="container container--wide">
+      <div class="site-footer__bottom">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="/">
+            <img src="/favicon-96x96.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+            <span class="site-footer__logo-text">Service <span class="site-footer__logo-sheep">Sheep</span></span>
+          </a>
+          <p class="site-footer__tagline">Territory management for congregations.</p>
+        </div>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__links">
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms-of-use">Terms of Use</a></li>
+            <li><a href="https://console.servicesheep.com" target="_blank" rel="noopener">Log In</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <hr class="site-footer__divider site-footer__divider--bottom">
+      <p class="site-footer__copyright">© 2026 Service Sheep · servicesheep.com</p>
+    </div>
+  </footer>
+</body>
+</html>

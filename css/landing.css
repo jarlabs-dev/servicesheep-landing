@@ -1,38 +1,18 @@
 /* landing.css — page-level layout for the coming-soon landing site.
  * Built only from tokens.css custom properties (no hard-coded colours/type).
  * BEM blocks here (.hero, .site-header, …) are candidates to promote into the
- * <ui-*> component library later if reused. */
+ * <ui-*> component library later if reused.
+ * The page shell and .site-header / .wordmark / .site-nav live in
+ * site-header.css (shared with the contact page). */
 
-/* ── Page shell ─────────────────────────────────────────────── */
-html { scroll-behavior: smooth; }
-
-/* Fill the viewport and vertically center the header + hero as a group,
-   pinning the footer to the bottom. The two `auto` margins split the
-   leftover space evenly above the header and below the hero. */
-body {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-}
-.site-header { margin-top: auto; }
-main { margin-bottom: auto; }
-
-.container {
-  max-width: 760px;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-}
-/* Wider shell for the single-column landing page */
-.container--lg { max-width: 880px; }
-
-.section { padding-block: clamp(2.5rem, 6vw, 4rem); }
-.section--tight { padding-block: clamp(1.5rem, 4vw, 2.5rem); }
+.section { padding-block: clamp(var(--space-48), 6vw, var(--space-64)); }
+.section--tight { padding-block: clamp(var(--space-24), 4vw, var(--space-48)); }
 
 /* Shared section heading */
 .section__eyebrow {
   font: var(--font-label-large);
   color: var(--color-brand-primary);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-8);
 }
 .section__title {
   font: var(--font-headline-medium);
@@ -41,77 +21,790 @@ main { margin-bottom: auto; }
 .section__lead {
   font: var(--font-body-large);
   color: var(--color-text-secondary);
-  margin-top: 0.75rem;
+  margin-top: var(--space-12);
   max-width: 52ch;
 }
 
-/* ── Header ─────────────────────────────────────────────────── */
-.site-header {
+/* ── Hero ───────────────────────────────────────────────────── */
+/* Mobile-first, matching the header's approach. Two breakpoints:
+   640px (phone → tablet) and 1024px (tablet → desktop, the same width the
+   nav header switches at, so the whole page changes shape at once). */
+.hero {
+  background: var(--color-surface);
+  padding-block: var(--space-48) var(--space-64);
+  text-align: center;
+}
+
+/* Two H1 lines. Leading opens up as the size drops: 108% is set for the 44px
+   display size and reads cramped once the phone wraps it to three lines. */
+/* Display Small → Medium → Large (see docs/typography.md). The Display tier's
+   800 weight and -1% tracking hold at every size; only size and leading step. */
+.hero__title {
+  font-family: var(--font-family-base);
+  font-weight: 800;
+  font-size: 2rem;         /* 32px — Display Small */
+  line-height: 1.12;
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+.hero__title--brand {
+  margin-top: var(--space-8);
+  color: var(--color-brand-primary);
+}
+
+.hero__caption {
+  margin-top: var(--space-24);
+  margin-inline: auto;
+  max-width: 60ch; /* keeps the measure readable once the desktop break is off */
+  font-family: var(--font-family-base);
+  font-weight: 500;
+  font-size: 1rem;     /* 16px */
+  line-height: 1.6;    /* 160% */
+  letter-spacing: 0;
+  color: var(--color-text-secondary);
+}
+/* The caption's hard break is a desktop-only typographic choice — below 1024px
+   the copy reflows on its own. */
+.hero__break { display: none; }
+
+.hero__actions {
+  margin-top: var(--space-24);
+  display: flex;
+  justify-content: center;
+}
+
+/* Sits flush under the button (0px). On phones it bleeds past the container's
+   24px padding to the full screen width; the negative margins cancel that
+   padding exactly. */
+.hero__image {
+  /* +2 gutters wide, pulled back by one gutter each side — derived from the
+     same token so the two can't drift apart. */
+  width: calc(100% + 2 * var(--space-24));
+  max-width: none;
+  height: auto;
+  margin-inline: calc(-1 * var(--space-24));
+}
+
+/* Tablet (640px and up) --------------------------------------- */
+@media (min-width: 640px) {
+  .hero { padding-block: var(--space-64); }
+  .hero__title {
+    font-size: 2.375rem; /* 38px — Display Medium */
+    line-height: 1.10;
+  }
+  /* Back inside the container; capped at the design width. */
+  .hero__image {
+    width: 100%;
+    max-width: 1145px;
+    margin-inline: auto;
+  }
+}
+
+/* Desktop (1024px and up) ------------------------------------- */
+@media (min-width: 1024px) {
+  .hero { padding-block: var(--space-96) var(--space-96); }
+  .hero__title {
+    font-size: 2.75rem; /* 44px — Display Large */
+    line-height: 1.08;  /* 108% */
+  }
+  .hero__caption {
+    max-width: none; /* the hard break controls the measure here */
+    font-size: 1.125rem; /* 18px — Lead */
+  }
+  .hero__break { display: inline; }
+}
+
+/* Full-width CTA on phones — a bigger tap target. Driven by CSS rather than
+   <ui-button full-width> because that attribute can't respond to width. */
+@media (max-width: 639px) {
+  .hero__actions ui-button,
+  .cta__actions ui-button { flex: 1 1 100%; }
+  .hero__actions .button,
+  .cta__actions .button { width: 100%; }
+  .cta__actions { align-self: stretch; } /* undo .cta__inner's centring so the row spans */
+}
+
+/* ── Benefits ───────────────────────────────────────────────── */
+/* Mobile-first, on the hero's two breakpoints: 640px (phone → tablet) and
+   1024px (tablet → desktop), so the whole page changes shape together.
+   The primary 900/300/100 shades below are raw palette values from
+   docs/color-palette.md — tokens.css only carries semantic tokens, so they're
+   scoped to the block instead of repeated inline at each use. */
+.benefits {
+  --benefits-bg: #083344;      /* primary 900 */
+  --benefits-fill: #0e7490;    /* primary 600 */
+  --benefits-accent: #67e8f9;  /* primary 300 */
+  --benefits-caption: #cffafe; /* primary 100 */
+
+  padding-block: var(--space-48);
+  background-color: var(--benefits-bg);
+  /* 4px dots (2px radius) of primary 600 at 18% on a 29.5px grid. The 2.5px
+     stop feathers the edge by half a pixel so the circles don't render jagged.
+     The grid is a fixed pixel pattern, so it holds its density at every width. */
+  background-image: radial-gradient(circle,
+                    rgb(14 116 144 / 0.18) 2px, transparent 2.5px);
+  background-size: 29.5px 29.5px;
+}
+
+/* Section-owned headline: its own class, longhands rather than the font:
+   shorthand, so no other section's heading rule can partly apply to it.
+   Sizes step 28 → 32 → 36px (Headline Medium → Display Small), with the
+   leading tightening as the size grows — the same trade the hero makes. */
+.benefits__title {
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  font-size: 1.75rem;  /* 28px — Headline Medium */
+  line-height: 1.29;   /* 129% */
+  letter-spacing: 0;
+  color: #fff;
+  text-align: center;
+  text-wrap: balance;  /* evens the two lines once the headline wraps */
+}
+
+/* One column on phones; the 2-up grid starts at the tablet break. */
+.benefits__grid {
+  list-style: none;
+  margin: var(--space-32) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
+}
+
+/* box-sizing is border-box globally, so the 1px border sits inside the card
+   and doesn't change its outer size. */
+.benefit-card {
+  padding: var(--space-24);
+  border-radius: var(--radius-card); /* 16px */
+  background: color-mix(in srgb, var(--benefits-fill) 22%, transparent);
+  border: 1px solid color-mix(in srgb, var(--benefits-accent) 18%, transparent);
+}
+
+.benefit-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-12);
+  background: color-mix(in srgb, var(--benefits-accent) 12%, transparent);
+  color: var(--benefits-accent); /* the inline SVG inherits this via currentColor */
+}
+.benefit-card__icon svg { width: 22px; height: 22px; }
+
+/* Card headline — same rule as the section title: own class, longhands only.
+   Values match the Title Medium step and hold at every width. */
+.benefit-card__title {
+  margin-top: var(--space-12);
+  font-family: var(--font-family-base);
+  font-weight: 600;
+  font-size: 1rem;          /* 16px */
+  line-height: 1.5;         /* 150% */
+  letter-spacing: 0.0015em; /* 0.15% */
+  color: #fff;
+}
+
+/* Body Medium, but at the design's 165% leading instead of the scale's 143%. */
+.benefit-card__text {
+  margin-top: var(--space-12);
+  font-family: var(--font-family-base);
+  font-weight: 500;
+  font-size: 0.875rem;      /* 14px */
+  line-height: 1.65;        /* 165% */
+  letter-spacing: 0.0025em; /* 0.25% */
+  color: var(--benefits-caption);
+}
+
+/* Tablet (640px and up) --------------------------------------- */
+/* The cards go 2-up here rather than at 1024px: they're compact enough to hold
+   a column at ~288px, and one full-width card per row reads sparse on a tablet. */
+@media (min-width: 640px) {
+  .benefits { padding-block: var(--space-64); }
+  .benefits__title {
+    font-size: 2rem;   /* 32px — Headline Large */
+    line-height: 1.25; /* 125% */
+  }
+  .benefits__grid {
+    margin-top: var(--space-48);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .benefit-card { padding: var(--space-32); }
+}
+
+/* Desktop (1024px and up) ------------------------------------- */
+/* Only the headline steps here. The 9-step spacing scale has no value between
+   64 and 96, so the section padding and grid offset reach their final size at
+   the tablet break and hold — declaring them again would be a no-op. */
+@media (min-width: 1024px) {
+  .benefits__title {
+    font-size: 2.25rem; /* 36px — Headline XL */
+    line-height: 1.22;  /* 122% */
+  }
+}
+
+
+/* ── Features ───────────────────────────────────────────────── */
+/* Mobile-first, on the page's two breakpoints: 640px (phone → tablet) and
+   1024px (tablet → desktop), so the whole page changes shape together.
+   Unlike .benefits this needs no block-local custom properties — every
+   colour it uses is already a semantic token. */
+.features {
+  padding-block: var(--space-48);
+  background-color: var(--color-surface);
+}
+
+/* Section-owned headline: its own class, longhands rather than the font:
+   shorthand, so no other section's heading rule can partly apply to it.
+   Sizes step 32 → 36 → 40px, with the leading tightening as the size grows —
+   the same trade the hero makes. The weight stays 800 at every size: ExtraBold
+   is the treatment, and only the size steps (see docs/typography.md). This is
+   deliberately a different treatment from .benefits__title — the two section
+   headlines are meant to differ. */
+.features__title {
+  font-family: var(--font-family-base);
+  font-weight: 800;
+  font-size: 2rem;    /* 32px — Headline XXL, phone step */
+  line-height: 1.28;  /* 128% */
+  letter-spacing: 0;
+  color: var(--color-text-primary);
+  text-align: center;
+  text-wrap: balance; /* evens the lines once the headline wraps */
+}
+
+/* One column on phones; 2-up at the tablet break, 4-up at desktop. Cards
+   stretch to the tallest in their row on their own — that's grid's default
+   align-items: stretch. It's what gives them a uniform height without pinning
+   the design's 302px, which would stop being right the moment a description
+   gains a line. */
+.features__grid {
+  list-style: none;
+  margin: var(--space-32) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-24);
+}
+
+/* box-sizing is border-box globally, so the 1px border sits inside the card
+   and doesn't change its outer size. --radius-12 rather than the --radius-card
+   alias (16px) because the design draws 12 — still a step on the radius scale,
+   just not the card default. */
+.feature-card {
+  padding: var(--space-24);
+  border-radius: var(--radius-12);
+  background: var(--color-background);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.feature-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-12);
+  background: var(--color-brand-accent-splash);
+  color: var(--color-brand-primary); /* the inline SVG inherits this via currentColor */
+}
+.feature-card__icon svg { width: 24px; height: 24px; }
+
+/* Card headline — same rule as the section title: own class, longhands only.
+   The one piece of card-level type on the page that steps: at 24px these
+   titles ran to three lines on a 320px phone. Weight holds at 700 and only
+   the size steps, 20 → 24px, with the leading opening as the size drops. */
+.feature-card__title {
+  margin-top: var(--space-16);  /* design draws 20 — nearest step */
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  font-size: 1.25rem; /* 20px — Headline Small, phone step */
+  line-height: 1.4;   /* 140% */
+  letter-spacing: 0;
+  color: var(--color-text-primary);
+}
+
+/* Body Medium. The font: shorthand is fine here — typography.md allows it for
+   body text, and nothing about this deviates from the scale step. */
+.feature-card__text {
+  margin-top: var(--space-12);  /* design draws 10 — nearest step */
+  font: var(--font-body-medium);
+  letter-spacing: 0.0025em;     /* 0.25% */
+  color: var(--color-text-secondary);
+}
+
+/* Tablet (640px and up) --------------------------------------- */
+/* The cards go 2-up here rather than waiting for 1024: one full-width card
+   per row reads sparse on a tablet, and ~288px a column holds this content
+   comfortably. Card padding opens to the design's 32/24 at the same time. */
+@media (min-width: 640px) {
+  .features { padding-block: var(--space-64); }
+  .features__title {
+    font-size: 2.25rem; /* 36px — Headline XXL, tablet step */
+    line-height: 1.24;  /* 124% */
+  }
+  .features__grid {
+    margin-top: var(--space-48);  /* design draws 56 — nearest step */
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .feature-card { padding: var(--space-32) var(--space-24); }
+  .feature-card__title {
+    font-size: 1.5rem; /* 24px — Headline Small */
+    line-height: 1.33; /* 133% */
+  }
+}
+
+/* Desktop (1024px and up) ------------------------------------- */
+/* The 4-up row the design is drawn at. Section padding reaches its final 96px
+   here — unlike .benefits, which stops at 64, this section is drawn at the
+   hero's 96px, so it takes the third step. */
+@media (min-width: 1024px) {
+  .features { padding-block: var(--space-96); }
+  .features__title {
+    font-size: 2.5rem; /* 40px — Headline XXL */
+    line-height: 1.2;  /* 120% */
+  }
+  .features__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+
+/* ── Onboarding ─────────────────────────────────────────────── */
+/* Three numbered step cards joined by arrows. Mobile-first on the page's two
+   breakpoints: a stacked column with arrow-down icons below 1024px, and the
+   design's row with arrow-right icons from 1024 up. Each arrow lives inside
+   the following step's <li> so the <ol> holds only the three steps. */
+.onboarding {
+  padding-block: var(--space-48);
+  background-color: var(--color-surface-variant);
+}
+
+/* Section-owned headline: its own class, longhands rather than the font:
+   shorthand. Display Small (800, −1% tracking) at every width — it's already
+   the smallest Display step, so only the leading changes: opened to 125% on
+   phones, where the headline can wrap, and the tier's 112% from 640 up. */
+.onboarding__title {
+  font-family: var(--font-family-base);
+  font-weight: 800;
+  font-size: 2rem;    /* 32px — Display Small */
+  line-height: 1.25;  /* 125%, phone step */
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+  text-align: center;
+  text-wrap: balance; /* evens the lines once the headline wraps */
+}
+
+/* Stacked column below 1024px. */
+.onboarding__steps {
+  list-style: none;
+  margin: var(--space-32) auto 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.onboarding__step {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 12 + 24 + 12 = 48px between stacked cards. */
+.onboarding__arrow {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--space-12);
+  color: var(--color-border-strong); /* the inline SVG inherits this via currentColor */
+}
+.onboarding__arrow svg { width: 24px; height: 24px; flex: none; }
+.onboarding__arrow-right { display: none; }
+
+/* box-sizing is border-box globally, so the 1px border sits inside the card.
+   Padding is the design's 28/32/28/36 snapped to the scale — the same 32/24
+   as .feature-card. */
+.step-card {
+  flex: 1; /* fills its step, so cards in the desktop row share one height */
+  padding: var(--space-32) var(--space-24);
+  border-radius: var(--radius-12);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.step-card__badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-block: 1.25rem;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-brand-primary);
+  color: var(--color-text-on-brand);
+  font: var(--font-title-medium);
 }
-.wordmark {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  text-decoration: none;
+
+/* Card headline — own class, longhands only. Headline Small at every width:
+   the cards are full width on phones, so these hold two lines at 320px. */
+.step-card__title {
+  margin-top: var(--space-16); /* design draws 20 — nearest step */
+  font-family: var(--font-family-base);
+  font-weight: 700;
+  font-size: 1.5rem;  /* 24px — Headline Small */
+  line-height: 1.33;  /* 133% */
+  letter-spacing: 0;
   color: var(--color-text-primary);
 }
-.wordmark__mark {
-  display: inline-flex;
-  width: 5.5rem;
-  height: 5.5rem;
-  border-radius: 1.25rem;
-  overflow: hidden;
-}
-.wordmark__mark img { width: 100%; height: 100%; object-fit: cover; }
-.wordmark__text { font: var(--font-headline-small); }
-.wordmark__service { font-weight: 500; }
 
-/* ── Hero ───────────────────────────────────────────────────── */
-.hero { text-align: center; padding-block: clamp(2.5rem, 7vw, 4.5rem) clamp(1.5rem, 4vw, 2.5rem); }
-
-.hero__title {
-  font-family: var(--font-family-base);
-  font-size: 3.25rem; /* 52px */
-  line-height: 1.1;
-  letter-spacing: 0;
-  max-width: 18ch;
-  margin-inline: auto;
-}
-.hero__title-coming { font-weight: 600; color: var(--color-text-muted); }
-.hero__title-soon { font-weight: 800; color: var(--color-brand-primary); }
-.hero__lead {
-  font: var(--font-title-medium);
-  font-weight: 500;
+.step-card__text {
+  margin-top: var(--space-12);
+  font: var(--font-body-large);
   color: var(--color-text-secondary);
-  max-width: 46ch;
-  margin: 1rem auto 0;
 }
-.hero__actions { margin-top: 1.75rem; display: inline-flex; }
 
-/* ── Footer ─────────────────────────────────────────────────── */
-.site-footer {
-  border-top: 1px solid var(--color-border-subtle);
-  text-align: center;
-  padding-block: 2.5rem;
+/* Tablet (640px and up) --------------------------------------- */
+/* Still a column — three cards and two arrows would leave ~155px per card.
+   The column is capped at 480px and centred so the description lines don't
+   run long on a wide tablet. */
+@media (min-width: 640px) {
+  .onboarding { padding-block: var(--space-64); }
+  .onboarding__title { line-height: 1.12; } /* 112% — Display Small */
+  .onboarding__steps {
+    margin-top: var(--space-48); /* design draws 56 — nearest step */
+    max-width: 480px;
+  }
 }
-.site-footer__brand { font: var(--font-title-small); color: var(--color-text-primary); }
-.site-footer__text { font: var(--font-body-medium); color: var(--color-text-muted); margin-top: 0.5rem; }
-.site-footer__text a { color: var(--color-brand-link); }
-.site-footer__legal {
-  font: var(--font-body-small);
-  color: var(--color-text-muted);
-  margin-top: 1.25rem;
+
+/* Desktop (1024px and up) ------------------------------------- */
+/* The design's row. Items stretch to the tallest (flex's default
+   align-items: stretch), and each card fills its item, so the three cards
+   share one height. Each step is at most 300px and shrinks evenly between
+   1024 and ~1076px, where the full 3 × 300 + 2 × 64 row doesn't fit. */
+@media (min-width: 1024px) {
+  .onboarding { padding-block: var(--space-96); }
+  .onboarding__steps {
+    max-width: none;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--space-64);
+  }
+  .onboarding__step {
+    position: relative; /* anchors the arrow in the gap to its left */
+    flex: 0 1 300px;
+  }
+
+  /* The arrow sits in the 64px gap before its card, out of flow, so all three
+     steps stay the same width. The top offset centres it on the badge: card
+     top padding + half the 40px badge − half the 24px icon (= 40px). Derived
+     rather than hard-coded so it follows either one. */
+  .onboarding__arrow {
+    position: absolute;
+    top: calc(var(--space-32) + 20px - 12px);
+    right: 100%;
+    width: var(--space-64);
+    padding: 0;
+  }
+  .onboarding__arrow-right { display: block; }
+  .onboarding__arrow-down { display: none; }
+}
+
+
+/* ── Console showcase ───────────────────────────────────────── */
+/* Copy + console screenshot on the brand teal. Mobile-first on the page's two
+   breakpoints: a stacked column (copy, then image) below 1024px, and the
+   design's side-by-side row from 1024 up. Everything stays left aligned at
+   every width — a checklist can't be centred, and a centred headline above a
+   left-aligned list reads as misaligned. The primary 300/100 shades are raw
+   palette values (docs/color-palette.md), scoped here as in .benefits. */
+.console-showcase {
+  --showcase-accent: #67e8f9;  /* primary 300 */
+  --showcase-caption: #cffafe; /* primary 100 */
+
+  padding-block: var(--space-48);
+  background-color: var(--color-brand-primary);
+  /* The nav's Admin Work link (#admin-work) lands here. 72px mirrors
+     --site-header-height (scoped to .site-header, so unreadable here) so the
+     sticky header doesn't cover the section's top. */
+  scroll-margin-top: 72px;
+}
+
+/* Column below 1024px, capped at the image's 660px and centred, so the copy
+   and the image share one left edge on a tablet. */
+.console-showcase__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+/* Section-owned headline: its own class, longhands only. Display Small at
+   every width — only the leading changes, opened to 125% on phones where it
+   can wrap, and the tier's 112% from 640 up (same as .onboarding__title). */
+.console-showcase__title {
+  font-family: var(--font-family-base);
+  font-weight: 800;
+  font-size: 2rem;    /* 32px — Display Small */
+  line-height: 1.25;  /* 125%, phone step */
+  letter-spacing: var(--tracking-display);
+  color: var(--color-surface);
+}
+
+.console-showcase__caption {
+  margin-top: var(--space-12);
+  font: var(--font-body-large);
+  color: var(--showcase-caption);
+}
+
+.console-showcase__list {
+  list-style: none;
+  margin: var(--space-32) 0 0; /* design draws 28 — nearest step */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.console-showcase__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  font: var(--font-body-large);
+  color: var(--showcase-caption);
+}
+
+/* Off-scale 2px: centres the 20px icon on the text's 24px first line
+   ((24 − 20) / 2), so it stays level with line one when an item wraps. */
+.console-showcase__check {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: var(--showcase-accent); /* the SVG fills with currentColor */
+}
+
+.console-showcase__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Tablet (640px and up) --------------------------------------- */
+/* Still a column — side by side would leave ~280px a half, wrapping the
+   list items to three lines. */
+@media (min-width: 640px) {
+  .console-showcase { padding-block: var(--space-64); }
+  .console-showcase__inner { max-width: calc(660px + 2 * var(--space-24)); } /* image width + gutters */
+  .console-showcase__title { line-height: 1.12; } /* 112% — Display Small */
+}
+
+/* Desktop (1024px and up) ------------------------------------- */
+/* The design's row: 96 + 467px image + 96 = the drawn 659px height, so the
+   height comes from padding rather than being pinned. The copy keeps its
+   natural width; the image takes up to 660px and shrinks first between
+   1024 and ~1200px rather than squeezing the copy. */
+@media (min-width: 1024px) {
+  .console-showcase { padding-block: var(--space-96); }
+  .console-showcase__inner {
+    max-width: var(--width-wide);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-64); /* design draws 60 — nearest step */
+  }
+  .console-showcase__copy { flex: 0 0 auto; }
+  .console-showcase__image {
+    flex: 0 1 660px;
+    min-width: 0;
+    width: auto;
+  }
+}
+
+
+/* ── Mobile showcase ────────────────────────────────────────── */
+/* Copy + store badges + phone screenshot on white, with a decorative wave
+   pinned full width to the section's bottom edge. Mirrors .console-showcase:
+   a stacked column (copy, then image) below 1024px, the design's row from
+   1024 up, left aligned at every width. */
+.mobile-showcase {
+  padding-block: var(--space-48);
+  /* The SVG scales with the section's width, so it stays a bottom band at
+     every size rather than being cropped. */
+  background: var(--color-surface) url("../assets/mobile-showcase-bg.svg") no-repeat center bottom / 100% auto;
+  /* The nav's Field Work link (#field-work) lands here; 72px mirrors
+     --site-header-height, as in .console-showcase. */
+  scroll-margin-top: 72px;
+}
+
+.mobile-showcase__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+/* Section-owned headline: Display Small at every width; 125% leading on
+   phones, the tier's 112% from 640 up. */
+.mobile-showcase__title {
+  font-family: var(--font-family-base);
+  font-weight: 800;
+  font-size: 2rem;    /* 32px — Display Small */
+  line-height: 1.25;  /* 125%, phone step */
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+}
+
+.mobile-showcase__list {
+  list-style: none;
+  margin: var(--space-32) 0 0; /* design draws 28 — nearest step */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.mobile-showcase__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  font: var(--font-body-large);
+  color: var(--color-text-primary);
+}
+
+/* 22px accent circle holding a 12px check. Off-scale 1px: centres the circle
+   on the text's 24px first line ((24 − 22) / 2), so it stays level with line
+   one when an item wraps. */
+.mobile-showcase__check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-brand-accent);
+  color: var(--color-brand-primary); /* the SVG fills with currentColor */
+}
+.mobile-showcase__check svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Badges are 44px tall on phones: at the design's 51px the pair is 340px
+   wide, more than a 375px phone's 327px content box. 44 stays above Apple's
+   40px badge minimum. Wrapping is the safety net for the narrowest phones.
+   Centred while the section is stacked; left aligned in the desktop row. */
+.mobile-showcase__stores {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: baseline;
-  gap: 0.5rem;
+  gap: var(--space-16);
+  margin-top: var(--space-32); /* design draws 28 — nearest step */
 }
-.site-footer__legal-label { color: var(--color-text-muted); }
-.site-footer__legal a { color: var(--color-brand-link); }
-.site-footer__legal-sep { color: var(--color-border-subtle); }
+.mobile-showcase__store {
+  display: block;
+  border-radius: var(--radius-8);
+}
+.mobile-showcase__store img {
+  display: block;
+  width: auto;
+  height: 44px;
+}
+
+.mobile-showcase__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Tablet (640px and up) --------------------------------------- */
+/* Still a column, capped at the copy's 528px so copy and image share one
+   left edge. The badges return to the design's 51px. */
+@media (min-width: 640px) {
+  .mobile-showcase { padding-block: var(--space-64); }
+  .mobile-showcase__inner { max-width: calc(528px + 2 * var(--space-24)); } /* copy width + gutters */
+  .mobile-showcase__title { line-height: 1.12; } /* 112% — Display Small */
+  .mobile-showcase__store img { height: 51px; }
+}
+
+/* Desktop (1024px and up) ------------------------------------- */
+/* The design's row. The drawn section is 655px tall but the content is
+   shorter, so the height is a min-height with the row centred in it. */
+@media (min-width: 1024px) {
+  .mobile-showcase {
+    display: flex;
+    align-items: center;
+    min-height: 655px;
+    padding-block: var(--space-96);
+  }
+  .mobile-showcase__inner {
+    max-width: var(--width-wide);
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* Off-scale 150px, as drawn. It's reached at 1248px, where 528 + 150 + 522
+       fills the 1200px wide container exactly, and eases down to 64 at 1024
+       so the row never overflows. */
+    gap: clamp(var(--space-64), 38.4vw - 329px, 150px);
+  }
+  .mobile-showcase__copy { flex: 0 1 528px; }
+  .mobile-showcase__stores { justify-content: flex-start; }
+  .mobile-showcase__image {
+    flex: 0 1 522px;
+    min-width: 0;
+    width: auto;
+  }
+}
+
+
+/* ── CTA ───────────────────────────────────────────────────── */
+/* Centred closing call to action on white, with a decorative cloud outline
+   pinned full width to the section's top edge. Single column at every width,
+   so only padding and leading step; the button goes full width on phones
+   (see the phone-only block after .hero). */
+.cta {
+  padding-block: var(--space-48);
+  /* Scales with the section's width, like .mobile-showcase's wave. */
+  background: var(--color-surface) url("../assets/cta-section-bg.svg") no-repeat center top / 100% auto;
+}
+
+.cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Section-owned headline: Display Small at every width; 125% leading on
+   phones, the tier's 112% from 640 up. */
+.cta__title {
+  font-family: var(--font-family-base);
+  font-weight: 800;
+  font-size: 2rem;    /* 32px — Display Small */
+  line-height: 1.25;  /* 125%, phone step */
+  letter-spacing: var(--tracking-display);
+  color: var(--color-text-primary);
+  text-wrap: balance;
+}
+
+.cta__caption {
+  max-width: 472px;
+  margin-top: var(--space-12);
+  font: var(--font-body-medium);
+  color: var(--color-text-muted);
+}
+
+.cta__actions {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-48); /* design draws 50 — nearest step */
+}
+
+/* Tablet (640px and up) --------------------------------------- */
+@media (min-width: 640px) {
+  .cta { padding-block: var(--space-64); }
+  .cta__title { line-height: 1.12; } /* 112% — Display Small */
+}
+
+/* Desktop (1024px and up) ------------------------------------- */
+/* The drawn section is 380px tall. The content (~190px) plus 96px padding
+   would land right on that edge, so padding holds at 64 and the height is a
+   min-height with the content centred in it, as in .mobile-showcase. */
+@media (min-width: 1024px) {
+  .cta {
+    display: flex;
+    align-items: center;
+    min-height: 380px;
+  }
+}

@@ -1,0 +1,228 @@
+/* site-header.css — the sticky nav header plus the page shell it sits in.
+ * Shared by every page that uses the site header (index.html, contact/).
+ * Moved verbatim out of landing.css; load it after components.css and
+ * before the page's own stylesheet. */
+
+/* ── Page shell ─────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
+/* In-page nav links (e.g. #admin-work) jump instantly for people who've
+   turned motion off. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* Fill the viewport so the footer sits at the bottom on short pages. The
+   sticky header sits at the top of the flow; `main`'s auto bottom margin
+   pushes the footer down when the content doesn't fill the screen. */
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+main { margin-bottom: auto; }
+
+/* ── Header ─────────────────────────────────────────────────── */
+/* Sticky 72px nav bar, written mobile-first.
+   Below 1024px: hamburger + logo on the left, small login on the right, and the
+   nav becomes a panel that slides down from under the bar (opened/closed by
+   js/site-header.js, which toggles .site-header--open).
+   From 1024px up: the logo and login containers share the same fixed width so
+   the nav menu between them stays optically centered on the page. */
+.site-header {
+  --site-header-height: 72px;
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  height: var(--site-header-height);
+  background: var(--color-surface);
+  box-shadow: inset 0 -1px 0 var(--color-border-subtle); /* inner bottom border */
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding-inline: var(--space-24);
+}
+
+/* Brand (hamburger + logo) ----------------------------------- */
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+.site-header__toggle {
+  display: inline-flex;
+  /* Off-scale by design: derived, not chosen. 11px is (44-22)/2 — the inset
+     that grows a 22px icon to a 44px touch target. The negative margin keeps
+     the layout (and the 16px gap to the logo) measured from the icon itself. */
+  padding: 11px;
+  margin: -11px;
+  border: 0;
+  border-radius: var(--radius-field);
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+.site-header__toggle:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: -2px;
+}
+.site-header__toggle-icon { display: block; width: 22px; height: 22px; }
+.site-header__toggle-icon--close,
+.site-header--open .site-header__toggle-icon--open { display: none; }
+.site-header--open .site-header__toggle-icon--close { display: block; }
+
+/* Logo ------------------------------------------------------- */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  text-decoration: none;
+  color: var(--color-text-primary);
+}
+.wordmark__mark { display: inline-flex; }
+.wordmark__mark img { width: 28px; height: 28px; }
+.wordmark__text {
+  font: var(--font-title-large);
+  font-weight: 400; /* "Service" regular; the token's own 600 is overridden here */
+}
+.wordmark__sheep { font-weight: 600; }
+
+/* Nav menu (mobile: slide-down panel) ------------------------ */
+/* The wrapper sits just under the bar and clips the list, so the list slides
+   down from behind the bar's bottom edge. Visibility flips only after the
+   slide-up finishes, so closed links can't be reached with Tab. */
+.site-nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: var(--z-raised);
+  overflow: hidden;
+  visibility: hidden;
+  transition: visibility 0s linear 250ms;
+}
+.site-header--open .site-nav {
+  visibility: visible;
+  transition-delay: 0s;
+}
+.site-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: var(--color-surface);
+  transform: translateY(-100%);
+  transition: transform 250ms ease-out;
+}
+.site-header--open .site-nav__list { transform: translateY(0); }
+.site-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-16);
+  padding: var(--space-16) var(--space-24);
+  font: var(--font-title-medium);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  box-shadow: inset 0 -1px 0 var(--color-border-subtle); /* inner bottom border keeps rows 56px */
+}
+.site-nav__link:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: -2px;
+}
+.site-nav__caret {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--color-border-strong);
+}
+
+/* Dims the page under the open menu; tapping it closes the menu. */
+.site-header__scrim {
+  position: fixed;
+  inset: var(--site-header-height) 0 0 0;
+  z-index: var(--z-base);
+  background: color-mix(in srgb, var(--color-text-primary) 40%, transparent); /* Neutral/900 at 40% */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease-out, visibility 0s linear 250ms;
+}
+.site-header--open .site-header__scrim {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+/* Stop the page behind the overlay from scrolling while the menu is open. */
+.has-site-menu-open { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav,
+  .site-nav__list,
+  .site-header__scrim { transition: none; }
+}
+
+/* Login ------------------------------------------------------ */
+.site-header__login {
+  display: flex;
+  justify-content: flex-end;
+}
+/* Each layout gets its own action: Contact in the mobile bar (Log In moves
+   into the menu), Log In on desktop (Contact sits in the nav row). */
+ui-button.site-header__login-button,
+.site-nav__item--desktop { display: none; }
+
+/* Desktop (1024px and up) ------------------------------------ */
+@media (min-width: 1024px) {
+  .site-header { box-shadow: none; }
+  .site-header__inner {
+    justify-content: flex-start;
+    padding-inline: var(--space-24);
+  }
+  .site-header__brand { flex: 0 0 191px; }
+  .site-header__toggle,
+  .site-header__scrim { display: none; }
+  /* Never lock page scroll on desktop, even if the menu was left open. */
+  .has-site-menu-open { overflow: visible; }
+  .wordmark { gap: var(--space-12); }
+  .wordmark__mark img { width: 32px; height: 32px; }
+
+  .site-nav {
+    position: static;
+    flex: 1 1 auto;
+    overflow: visible;
+    visibility: visible;
+    transition: none;
+  }
+  .site-nav__list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-24);
+    background: none;
+    transform: none;
+    transition: none;
+  }
+  .site-nav__link {
+    display: block;
+    padding: var(--space-12);
+    font: var(--font-body-large);
+    color: var(--color-text-secondary);
+    text-align: center;
+    border-radius: var(--radius-field);
+    box-shadow: none;
+  }
+  .site-nav__link:hover { color: var(--color-text-primary); }
+  .site-nav__link:focus-visible { outline-offset: 2px; }
+  .site-nav__caret { display: none; }
+
+  .site-header__login { flex: 0 0 191px; }
+  ui-button.site-header__contact,
+  .site-nav__item--mobile { display: none; }
+  ui-button.site-header__login-button { display: inline; }
+  .site-nav__item--desktop { display: list-item; }
+}
+
+/* Applied once nav functionality lands. Kept after the desktop block so it
+   wins over both layouts' default link colour. */
+.site-nav__link--active { color: var(--color-brand-primary); }

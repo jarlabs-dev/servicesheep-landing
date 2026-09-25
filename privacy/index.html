@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — Service Sheep</title>
+  <!-- Keep legal pages out of search results (their disclaimer names JW.ORG / Watchtower) -->
+  <meta name="robots" content="noindex">
+  <meta name="description" content="How the Service Sheep website handles the information you share through its contact form, including the use of Google reCAPTCHA.">
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Service Sheep">
+  <meta name="theme-color" content="#0e7490">
+
+  <!-- Manrope — self-hosted (no external request, so the page never stalls on a blocked font server) -->
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/site-header.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
+  <link rel="stylesheet" href="/css/legal.css">
+
+  <!-- Component registry (modules defer automatically) -->
+  <script type="module" src="/js/main.js"></script>
+  <!-- Mobile nav menu toggle -->
+  <script type="module" src="/js/site-header.js"></script>
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container container--wide site-header__inner">
+      <div class="site-header__brand">
+        <!-- Mobile only (below 1024px) -->
+        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg class="site-header__toggle-icon site-header__toggle-icon--open" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+          <svg class="site-header__toggle-icon site-header__toggle-icon--close" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
+        </button>
+
+        <a class="wordmark" href="/">
+          <span class="wordmark__mark">
+            <img src="/favicon-96x96.png" alt="" width="32" height="32">
+          </span>
+          <span class="wordmark__text">Service <span class="wordmark__sheep">Sheep</span></span>
+        </a>
+      </div>
+
+      <!-- One nav for both layouts: a centered row on desktop, a slide-down panel on mobile.
+           Admin Work / Field Work jump to the home page's showcase sections; Support opens /support.
+           Contact shows only on desktop (mobile has the Contact button in the bar);
+           Log In shows only in the mobile menu (desktop has the Log In button). -->
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/#admin-work"><span>Admin Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/#field-work"><span>Field Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--desktop"><a class="site-nav__link" href="/contact"><span>Contact</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/support"><span>Support</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--mobile"><a class="site-nav__link" href="https://console.servicesheep.com" target="_blank" rel="noopener"><span>Log In</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__login">
+        <!-- Below 1024px: Contact (primary, small). From 1024px up: Log In (ghost, medium). -->
+        <ui-button class="site-header__contact" href="/contact" size="small" data-label="Contact"></ui-button>
+        <ui-button class="site-header__login-button" href="https://console.servicesheep.com" target="_blank" rel="noopener"
+                   variant="text" data-label="Log In"></ui-button>
+      </div>
+    </div>
+
+    <!-- Dims the page while the mobile menu is open; tapping it closes the menu -->
+    <div class="site-header__scrim" aria-hidden="true"></div>
+  </header>
+
+  <!-- The website's own legal page (the mobile app's live under /app/legal/) -->
+  <main class="container legal">
+    <h1 class="legal__title">Privacy Policy</h1>
+    <p class="legal__meta">
+      <strong>Service Sheep website</strong><br>
+      <span class="legal__meta-updated">Last updated: September 25, 2026</span>
+    </p>
+
+    <h2>1. Overview</h2>
+    <p>Service Sheep is a field ministry territory management platform developed by Jar Labs (Johannen Gabriel Robles &amp; Jazielle Mavis Robles). This privacy policy covers the Service Sheep website at <a href="https://servicesheep.com">servicesheep.com</a> only, including its contact form. It explains what information the website collects, how it is used, and your rights under the <strong>Data Privacy Act of 2012 (Republic Act No. 10173)</strong> of the Philippines.</p>
+    <p>The Service Sheep mobile app and web console are separate products with their own policies: the <a href="/app/legal/privacy-policy">mobile app privacy policy</a> and the <a href="https://console.servicesheep.com/legal/privacy-policy" target="_blank" rel="noopener">web console privacy policy</a>.</p>
+
+    <h2>2. Definitions</h2>
+    <ul>
+      <li><strong>"We," "us," "our"</strong> — Jar Labs (Johannen Gabriel Robles &amp; Jazielle Mavis Robles), the developers of Service Sheep.</li>
+      <li><strong>"You," "your," "visitor"</strong> — any person visiting or using the website.</li>
+      <li><strong>"The website"</strong> — the Service Sheep website at servicesheep.com that this policy covers, excluding the mobile app's pages under <code>/app</code>.</li>
+      <li><strong>"The contact form"</strong> — the form on the website's <a href="/contact">Contact</a> page.</li>
+      <li><strong>"The mobile app"</strong> and <strong>"the web console"</strong> — the Service Sheep iOS/Android app and the admin portal at <a href="https://console.servicesheep.com" target="_blank" rel="noopener">console.servicesheep.com</a>, each governed by its own privacy policy.</li>
+    </ul>
+
+    <h2>3. Who This Policy Applies To</h2>
+    <p>This policy applies to anyone who visits the website or submits the contact form. <strong>Service Sheep is intended for use in the Philippines only.</strong> Visitors outside the Philippines are not the intended audience of this service, and this policy is written in accordance with Philippine law. Browsing the website does not require an account.</p>
+
+    <h2>4. Information We Collect</h2>
+    <p>The website does not ask for any personal information unless you choose to fill in the contact form. When you submit it, we receive:</p>
+    <ul>
+      <li>Your name</li>
+      <li>Your role in the congregation (for example, Service Overseer)</li>
+      <li>Your congregation's name</li>
+      <li>Your preferred contact methods (WhatsApp, Viber, iMessage, or regular text message)</li>
+      <li>Your Philippine mobile number</li>
+    </ul>
+    <p>If you select a role other than Service Overseer, the form recommends that you reach out to your Service Overseer instead, and <strong>nothing is sent to us</strong>.</p>
+    <p>Please do not include information about other people, such as householders, in the contact form.</p>
+
+    <h2>5. How We Use Your Information</h2>
+    <p>We use the information you submit through the contact form only to:</p>
+    <ul>
+      <li>Respond to your request and contact you through the method you chose</li>
+      <li>Help set up Service Sheep for your congregation</li>
+    </ul>
+    <p>Your role is used only to route your message to the right person. We do not add you to marketing or mailing lists, and we do not sell, rent, or share your information with advertisers.</p>
+
+    <h2>6. How the Contact Form Is Delivered (EmailJS)</h2>
+    <p>The website has no server of its own. When you submit the contact form, your browser sends your answers to <strong>EmailJS</strong> (EmailJS Pte. Ltd.), a service that delivers them to our inbox as an email. EmailJS processes the submission only to deliver it.</p>
+    <p>EmailJS's privacy policy is available at <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank" rel="noopener">https://www.emailjs.com/legal/privacy-policy/</a>.</p>
+
+    <h2>7. Spam Protection (Google reCAPTCHA)</h2>
+    <p>The contact form is protected by <strong>Google reCAPTCHA</strong> (invisible reCAPTCHA v2) to prevent spam and automated abuse. reCAPTCHA runs only on the Contact page.</p>
+    <p>To tell people apart from automated programs, reCAPTCHA collects hardware and software information, such as your IP address, device and browser data, and cookies set by Google, and sends it to Google for analysis. Occasionally it may ask you to complete a short challenge. The information reCAPTCHA collects is used by Google to provide and improve the service and for general security purposes; it is not used by Google for personalized advertising.</p>
+    <p>Your use of reCAPTCHA is subject to Google's <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a>.</p>
+
+    <h2>8. Hosting and Server Logs</h2>
+    <p>The website is hosted on <strong>GitHub Pages</strong> (GitHub, Inc.) and delivered through its content delivery network. Like any web host, GitHub may log technical information about each visit, such as your IP address, browser type, and the pages requested, for security and to keep the service running. We do not use these logs to identify visitors.</p>
+    <p>GitHub's privacy statement is available at <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's General Privacy Statement</a>.</p>
+    <p>The website's fonts and images are served from our own domain, so browsing the website does not send requests to font or image services run by third parties.</p>
+
+    <h2>9. Cookies and Tracking</h2>
+    <p>To be explicit, the website does not:</p>
+    <ul>
+      <li>Set its own cookies</li>
+      <li>Use analytics, tracking pixels, or session recording</li>
+      <li>Show advertising or share data with advertisers</li>
+      <li>Sell or monetize any information</li>
+    </ul>
+    <p>The only cookies involved are those set by Google reCAPTCHA on the Contact page, as described in Section 7.</p>
+
+    <h2>10. Data Retention</h2>
+    <p>We keep contact form submissions only for as long as we need them to respond to your request and to help set up your congregation. After that, we delete them. You can ask us to delete your submission at any time (see Section 12).</p>
+
+    <h2>11. Data Security</h2>
+    <ul>
+      <li>The website is served only over HTTPS, so information you submit is encrypted in transit.</li>
+      <li>Contact form submissions are accessible only to the Jar Labs team.</li>
+      <li>No contact form data is stored on the website itself.</li>
+    </ul>
+    <p>No method of transmission over the internet is completely secure, but we take reasonable steps to protect the information you share with us.</p>
+
+    <h2>12. Your Rights</h2>
+    <p>Under the <strong>Data Privacy Act of 2012 (RA 10173)</strong>, you have the right to:</p>
+    <ul>
+      <li><strong>Be informed</strong> — know how your personal information is collected and used</li>
+      <li><strong>Access</strong> — request a copy of the information we hold about you</li>
+      <li><strong>Correction</strong> — request correction of inaccurate information</li>
+      <li><strong>Erasure</strong> — request deletion of your information</li>
+      <li><strong>Object</strong> — object to the processing of your information</li>
+      <li><strong>Data portability</strong> — receive your information in a portable format</li>
+      <li><strong>Lodge a complaint</strong> — file a complaint with the National Privacy Commission</li>
+    </ul>
+    <p>To exercise any of these rights, contact us at <strong><a href="mailto:support@servicesheep.com">support@servicesheep.com</a></strong>.</p>
+
+    <h2>13. Children</h2>
+    <p>The website is intended for users aged 16 and older. We do not knowingly collect personal information from anyone under 16. If you believe a child has submitted the contact form, contact us and we will delete the submission.</p>
+
+    <h2>14. Changes to This Policy</h2>
+    <p>We may update this policy from time to time. The current version is always available at <a href="https://servicesheep.com/privacy">https://servicesheep.com/privacy</a>. The "Last updated" date at the top of this document indicates when it was last revised.</p>
+
+    <h2>15. Contact</h2>
+    <p>
+      <strong>Jar Labs</strong><br>
+      Johannen Gabriel Robles &amp; Jazielle Mavis Robles<br>
+      <a href="mailto:support@servicesheep.com">support@servicesheep.com</a>
+    </p>
+
+    <p class="legal__disclaimer">Service Sheep is an independent project by Jar Labs and is not affiliated with JW.ORG or the Watchtower Bible and Tract Society. This is not an official application of Jehovah's Witnesses.</p>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="site-footer site-footer--compact">
+    <div class="container container--wide">
+      <div class="site-footer__bottom">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="/">
+            <img src="/favicon-96x96.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+            <span class="site-footer__logo-text">Service <span class="site-footer__logo-sheep">Sheep</span></span>
+          </a>
+          <p class="site-footer__tagline">Territory management for congregations.</p>
+        </div>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__links">
+            <li><a href="/privacy" aria-current="page">Privacy Policy</a></li>
+            <li><a href="/terms-of-use">Terms of Use</a></li>
+            <li><a href="https://console.servicesheep.com" target="_blank" rel="noopener">Log In</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <hr class="site-footer__divider site-footer__divider--bottom">
+      <p class="site-footer__copyright">© 2026 Service Sheep · servicesheep.com</p>
+    </div>
+  </footer>
+</body>
+</html>

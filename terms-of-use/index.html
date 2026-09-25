@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terms of Use — Service Sheep</title>
+  <!-- Keep legal pages out of search results (their disclaimer names JW.ORG / Watchtower) -->
+  <meta name="robots" content="noindex">
+  <meta name="description" content="The terms that govern your use of the Service Sheep website and its contact form.">
+
+  <!-- Favicons / PWA -->
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Service Sheep">
+  <meta name="theme-color" content="#0e7490">
+
+  <!-- Manrope — self-hosted (no external request, so the page never stalls on a blocked font server) -->
+  <link rel="preload" href="/assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/css/fonts.css">
+
+  <!-- Design system -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/site-header.css">
+  <link rel="stylesheet" href="/css/site-footer.css">
+  <link rel="stylesheet" href="/css/legal.css">
+
+  <!-- Component registry (modules defer automatically) -->
+  <script type="module" src="/js/main.js"></script>
+  <!-- Mobile nav menu toggle -->
+  <script type="module" src="/js/site-header.js"></script>
+</head>
+<body>
+  <!-- ── Header ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container container--wide site-header__inner">
+      <div class="site-header__brand">
+        <!-- Mobile only (below 1024px) -->
+        <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+          <svg class="site-header__toggle-icon site-header__toggle-icon--open" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+          <svg class="site-header__toggle-icon site-header__toggle-icon--close" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/></svg>
+        </button>
+
+        <a class="wordmark" href="/">
+          <span class="wordmark__mark">
+            <img src="/favicon-96x96.png" alt="" width="32" height="32">
+          </span>
+          <span class="wordmark__text">Service <span class="wordmark__sheep">Sheep</span></span>
+        </a>
+      </div>
+
+      <!-- One nav for both layouts: a centered row on desktop, a slide-down panel on mobile.
+           Admin Work / Field Work jump to the home page's showcase sections; Support opens /support.
+           Contact shows only on desktop (mobile has the Contact button in the bar);
+           Log In shows only in the mobile menu (desktop has the Log In button). -->
+      <nav id="site-nav" class="site-nav" aria-label="Main">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="/#admin-work"><span>Admin Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/#field-work"><span>Field Work</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--desktop"><a class="site-nav__link" href="/contact"><span>Contact</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li><a class="site-nav__link" href="/support"><span>Support</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+          <li class="site-nav__item--mobile"><a class="site-nav__link" href="https://console.servicesheep.com" target="_blank" rel="noopener"><span>Log In</span><svg class="site-nav__caret" aria-hidden="true" viewBox="0 0 256 256" fill="currentColor"><path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/></svg></a></li>
+        </ul>
+      </nav>
+
+      <div class="site-header__login">
+        <!-- Below 1024px: Contact (primary, small). From 1024px up: Log In (ghost, medium). -->
+        <ui-button class="site-header__contact" href="/contact" size="small" data-label="Contact"></ui-button>
+        <ui-button class="site-header__login-button" href="https://console.servicesheep.com" target="_blank" rel="noopener"
+                   variant="text" data-label="Log In"></ui-button>
+      </div>
+    </div>
+
+    <!-- Dims the page while the mobile menu is open; tapping it closes the menu -->
+    <div class="site-header__scrim" aria-hidden="true"></div>
+  </header>
+
+  <!-- The website's own legal page (the mobile app's live under /app/legal/) -->
+  <main class="container legal">
+    <h1 class="legal__title">Terms of Use</h1>
+    <p class="legal__meta">
+      <strong>Service Sheep website</strong><br>
+      <span class="legal__meta-updated">Last updated: September 25, 2026</span>
+    </p>
+
+    <h2>1. Overview</h2>
+    <p>Service Sheep is a field ministry territory management platform developed by Jar Labs (Johannen Gabriel Robles &amp; Jazielle Mavis Robles). These Terms of Use cover the Service Sheep website at <a href="https://servicesheep.com">servicesheep.com</a> only, including its contact form.</p>
+    <p>By accessing or using the website, you agree to be bound by these Terms. If you do not agree, do not use the website.</p>
+    <p>The Service Sheep mobile app and web console are separate products with their own terms: the <a href="/app/legal/terms-of-use">mobile app terms of use</a> and the <a href="https://console.servicesheep.com/legal/terms-of-use" target="_blank" rel="noopener">web console terms of use</a>.</p>
+
+    <h2>2. Definitions</h2>
+    <ul>
+      <li><strong>"We," "us," "our"</strong> — Jar Labs (Johannen Gabriel Robles &amp; Jazielle Mavis Robles), the developers of Service Sheep.</li>
+      <li><strong>"You," "your," "visitor"</strong> — any person visiting or using the website.</li>
+      <li><strong>"The website"</strong> — the Service Sheep website at servicesheep.com that these Terms cover, excluding the mobile app's pages under <code>/app</code>.</li>
+      <li><strong>"The contact form"</strong> — the form on the website's <a href="/contact">Contact</a> page.</li>
+      <li><strong>"Content"</strong> — all text, images, illustrations, logos, screenshots, design, and code on the website.</li>
+    </ul>
+
+    <h2>3. Use of the Website</h2>
+    <p>The website provides information about Service Sheep and a way to contact us about setting it up for your congregation. <strong>Service Sheep is intended for use in the Philippines only.</strong></p>
+    <p>You may browse the website and use the contact form for your own personal, non-commercial purposes, in accordance with these Terms. You must be at least 16 years old to submit the contact form.</p>
+
+    <h2>4. Acceptable Use</h2>
+    <p>You may not use the website to:</p>
+    <ul>
+      <li>Submit false, misleading, or spam requests through the contact form, or submit it on someone else's behalf without their permission</li>
+      <li>Impersonate any person, congregation, or organization</li>
+      <li>Attempt to bypass, disable, or interfere with the reCAPTCHA spam protection or any other security feature</li>
+      <li>Use bots, scrapers, or other automated means to access, copy, or submit to the website</li>
+      <li>Upload or send viruses or any other harmful code</li>
+      <li>Interfere with the proper functioning of the website or the services it relies on</li>
+      <li>Use the website in any manner that violates applicable law or regulation</li>
+    </ul>
+
+    <h2>5. Contact Form Submissions</h2>
+    <p>When you submit the contact form, you confirm that the information you provide is accurate and that it is yours to share. Please do not include information about other people, such as householders.</p>
+    <p>Submitting the contact form does not create an account and does not guarantee that Service Sheep will be set up for your congregation. We may decline or ignore any request, including those that appear to be spam or abuse.</p>
+    <p>How we handle the information you submit is described in our <a href="/privacy">Privacy Policy</a>.</p>
+
+    <h2>6. Intellectual Property</h2>
+    <p>The website and its Content, including the Service Sheep name, logo, sheep illustrations, screenshots, and design, are owned by Jar Labs and protected by intellectual property laws. These Terms do not transfer any ownership rights to you. All rights not expressly granted are reserved.</p>
+    <p>Without our prior written permission, you may not:</p>
+    <ul>
+      <li>Copy, reproduce, republish, or distribute the website or its Content</li>
+      <li>Duplicate, mirror, or frame the website, or create a website or app that imitates it</li>
+      <li>Modify or create derivative works from the Content</li>
+      <li>Use the Service Sheep name or logo in a way that suggests we endorse you or your product</li>
+      <li>Remove or obscure any proprietary notices</li>
+    </ul>
+    <p>You may link to the website, provided you do so in a way that is fair and does not misrepresent your relationship with us.</p>
+
+    <h2>7. Third-Party Services and Links</h2>
+    <p>The website relies on the following third-party services:</p>
+    <ul>
+      <li><strong>EmailJS</strong> — delivers contact form submissions to us. See <a href="https://www.emailjs.com/legal/privacy-policy/" target="_blank" rel="noopener">EmailJS's privacy policy</a>.</li>
+      <li><strong>Google reCAPTCHA</strong> — protects the contact form from spam. Its use is subject to Google's <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> and <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Terms of Service</a>.</li>
+      <li><strong>GitHub Pages</strong> — hosts the website. See <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's General Privacy Statement</a>.</li>
+    </ul>
+    <p>The website also links to other sites, such as the Service Sheep web console and app stores. We are not responsible for the content or practices of third-party services and sites.</p>
+
+    <h2>8. Privacy</h2>
+    <p>Our collection and handling of information through the website is described in our <a href="/privacy">Privacy Policy</a>. By using the website, you acknowledge that you have read and understood the Privacy Policy.</p>
+
+    <h2>9. Disclaimers</h2>
+    <p>The website and its Content are provided <strong>"as is"</strong> and <strong>"as available"</strong> without warranties of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
+    <p>We do not warrant that:</p>
+    <ul>
+      <li>The website will be error-free or uninterrupted</li>
+      <li>Defects will be corrected</li>
+      <li>The website is free of viruses or other harmful components</li>
+      <li>The information on the website is complete, accurate, or up to date</li>
+    </ul>
+    <p>Descriptions and screenshots of Service Sheep on the website are for information only and may change as the product develops.</p>
+
+    <h2>10. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by applicable law, Jar Labs (Johannen Gabriel Robles &amp; Jazielle Mavis Robles) shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of, or inability to use, the website — including but not limited to reliance on its Content or a contact form submission that fails to be delivered.</p>
+    <p>The website is provided free of charge. Nothing in these Terms limits or excludes liability for gross negligence, fraud, or willful misconduct.</p>
+
+    <h2>11. Indemnification</h2>
+    <p>You agree to indemnify and hold harmless Jar Labs (Johannen Gabriel Robles &amp; Jazielle Mavis Robles) from any claims, losses, damages, liabilities, or expenses (including reasonable legal fees) arising from your use of the website, your violation of these Terms, or your violation of any applicable law — including claims arising from information you submitted through the contact form.</p>
+
+    <h2>12. Suspension of Access</h2>
+    <p>We may restrict or block access to the website or the contact form, without notice, if we reasonably believe you have violated these Terms or if required by law.</p>
+
+    <h2>13. Governing Law</h2>
+    <p>These Terms are governed by and construed in accordance with the laws of the Republic of the Philippines, without regard to its conflict-of-law provisions. Any disputes arising under these Terms shall be subject to the jurisdiction of the appropriate courts of the Philippines.</p>
+
+    <h2>14. Changes to These Terms</h2>
+    <p>We may update these Terms from time to time. The current version is always available at <a href="https://servicesheep.com/terms-of-use">https://servicesheep.com/terms-of-use</a>. The "Last updated" date at the top indicates when they were last revised. Continued use of the website after changes are posted constitutes acceptance of the revised Terms.</p>
+
+    <h2>15. General Provisions</h2>
+    <p><strong>Severability.</strong> If any provision of these Terms is held to be invalid or unenforceable, that provision will be modified to the minimum extent necessary to make it enforceable. The remaining provisions will continue in full force and effect.</p>
+    <p><strong>Entire Agreement.</strong> These Terms, together with our <a href="/privacy">Privacy Policy</a>, constitute the entire agreement between you and Jar Labs regarding your use of the website and supersede any prior agreements or understandings on that subject.</p>
+    <p><strong>No Waiver.</strong> Our failure to enforce any right or provision of these Terms will not be considered a waiver of that right or provision.</p>
+
+    <h2>16. Contact</h2>
+    <p>
+      <strong>Jar Labs</strong><br>
+      Johannen Gabriel Robles &amp; Jazielle Mavis Robles<br>
+      <a href="mailto:support@servicesheep.com">support@servicesheep.com</a>
+    </p>
+
+    <p class="legal__disclaimer">Service Sheep is an independent project by Jar Labs and is not affiliated with JW.ORG or the Watchtower Bible and Tract Society. This is not an official application of Jehovah's Witnesses.</p>
+  </main>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="site-footer site-footer--compact">
+    <div class="container container--wide">
+      <div class="site-footer__bottom">
+        <div class="site-footer__brand">
+          <a class="site-footer__logo" href="/">
+            <img src="/favicon-96x96.png" alt="" width="28" height="28" loading="lazy" decoding="async">
+            <span class="site-footer__logo-text">Service <span class="site-footer__logo-sheep">Sheep</span></span>
+          </a>
+          <p class="site-footer__tagline">Territory management for congregations.</p>
+        </div>
+        <nav class="site-footer__nav" aria-label="Footer">
+          <ul class="site-footer__links">
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="/terms-of-use" aria-current="page">Terms of Use</a></li>
+            <li><a href="https://console.servicesheep.com" target="_blank" rel="noopener">Log In</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <hr class="site-footer__divider site-footer__divider--bottom">
+      <p class="site-footer__copyright">© 2026 Service Sheep · servicesheep.com</p>
+    </div>
+  </footer>
+</body>
+</html>
